@@ -4,6 +4,7 @@ using System.Entities.WareHouse;
 
 namespace System.Database
 {
+   //comentario
     public class DbContextSystem : DbContext
     {
         public DbSet<Category> Categories { get; set; }
