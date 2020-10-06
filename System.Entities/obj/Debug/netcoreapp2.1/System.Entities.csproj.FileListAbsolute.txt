@@ -1,0 +1,9 @@
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.Entities\bin\Debug\netcoreapp2.1\System.Entities.deps.json
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.Entities\bin\Debug\netcoreapp2.1\System.Entities.dll
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.Entities\bin\Debug\netcoreapp2.1\System.Entities.pdb
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.Entities\obj\Debug\netcoreapp2.1\System.Entities.csprojAssemblyReference.cache
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.Entities\obj\Debug\netcoreapp2.1\System.Entities.AssemblyInfoInputs.cache
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.Entities\obj\Debug\netcoreapp2.1\System.Entities.AssemblyInfo.cs
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.Entities\obj\Debug\netcoreapp2.1\System.Entities.csproj.CoreCompileInputs.cache
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.Entities\obj\Debug\netcoreapp2.1\System.Entities.dll
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.Entities\obj\Debug\netcoreapp2.1\System.Entities.pdb
