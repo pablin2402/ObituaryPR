@@ -1,4 +1,4 @@
-# administrator
+# administrator-page
 
 ## Project setup
 ```

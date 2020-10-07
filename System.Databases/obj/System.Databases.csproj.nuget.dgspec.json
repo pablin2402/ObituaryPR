@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj": {}
+    "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj": {}
   },
   "projects": {
-    "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj": {
+    "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj",
+        "projectUniqueName": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj",
         "projectName": "System.Databases",
-        "projectPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj",
+        "projectPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\obj\\",
+        "outputPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
-                "projectPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj"
+              "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
+                "projectPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj"
               }
             }
           }
@@ -75,14 +75,14 @@
         }
       }
     },
-    "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
+    "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj",
+        "projectUniqueName": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj",
         "projectName": "System.Entity",
-        "projectPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj",
+        "projectPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\obj\\",
+        "outputPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
