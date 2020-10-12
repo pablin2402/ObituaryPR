@@ -1,56 +1,65 @@
 <template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+  <v-app id="inspire">
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-sheet rounded="lg">
+        <v-list nav dense>
+          <v-list-item-group active-class="deep-purple--text text--accent-4">
+            <v-list-item :to="{ name: 'home' }">
+              <v-list-item-action>
+                <v-icon>home</v-icon>
+              </v-list-item-action>
+              <v-list-item-title>Inicio </v-list-item-title>
+            </v-list-item>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+            <v-divider class="my-2"></v-divider>
+            <v-list-group :value="true" prepend-icon="mdi-account-circle">
+              <template v-slot:activator>
+                <v-list-item-title>WareHouse</v-list-item-title>
+              </template>
+              <v-list-item :to="{ name: 'categories' }">
+                <v-list-item-action>
+                  <v-icon>home</v-icon>
+                </v-list-item-action>
+                <v-list-item-title>Category </v-list-item-title>
+              </v-list-item>
+              <v-list-item :to="{ name: 'article' }">
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-title>Article </v-list-item-title>
+              </v-list-item>
+            </v-list-group>
+          </v-list-item-group>
+        </v-list>
+      </v-sheet>
+    </v-navigation-drawer>
+    <v-app-bar color="blue" dark>
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>open_in_new</v-icon>
-      </v-btn>
+      <v-toolbar-title>Obituary</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld />
+      <v-container fluid fill-height>
+        <v-slide-y-transition mode="out-in">
+          <router-view />
+        </v-slide-y-transition>
+      </v-container>
     </v-main>
+    <v-footer padless>
+      <v-col class="text-center" cols="12">
+        {{ new Date().getFullYear() }} — <strong>Obituary</strong>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
-
 export default {
   name: "App",
 
-  components: {
-    HelloWorld
-  },
+  components: {},
 
-  data: () => ({
-    //
-  })
+  data: () => ({ drawer: null }),
 };
 </script>

@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Database;
-using System.Entities.WareHouse;
 using System.Web.DTOModels.WareHouse.Category;
+using System.Entity.WareHouse;
+using System.WebCloud.DTOModels.WareHouse.Category;
 
 namespace System.Web.Controllers
 {
@@ -32,6 +33,19 @@ namespace System.Web.Controllers
                 nombre = c.nombre,
                 descripcion = c.descripcion,
                 condicion = c.condicion
+            });
+
+        }
+        // GET: api/Categories/Select
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<SelectDTO>> Select()
+        {
+            var categoria = await _context.Categories.Where( c => c.condicion == true).ToListAsync();
+
+            return categoria.Select(c => new SelectDTO
+            {
+                idcategoria = c.idcategoria,
+                nombre = c.nombre
             });
 
         }

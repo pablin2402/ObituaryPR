@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\System.WebCloud.csproj": {}
+    "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\System.WebCloud.csproj": {}
   },
   "projects": {
-    "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj": {
+    "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj",
+        "projectUniqueName": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj",
         "projectName": "System.Databases",
-        "projectPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj",
+        "projectPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\obj\\",
+        "outputPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
-                "projectPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj"
+              "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
+                "projectPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj"
               }
             }
           }
@@ -75,14 +75,14 @@
         }
       }
     },
-    "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
+    "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj",
+        "projectUniqueName": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj",
         "projectName": "System.Entity",
-        "projectPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj",
+        "projectPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\obj\\",
+        "outputPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -130,14 +130,14 @@
         }
       }
     },
-    "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\System.WebCloud.csproj": {
+    "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\System.WebCloud.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\System.WebCloud.csproj",
+        "projectUniqueName": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\System.WebCloud.csproj",
         "projectName": "System.WebCloud",
-        "projectPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\System.WebCloud.csproj",
+        "projectPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\System.WebCloud.csproj",
         "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\obj\\",
+        "outputPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.WebCloud\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -156,11 +156,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj": {
-                "projectPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj"
+              "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj": {
+                "projectPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Databases\\System.Databases.csproj"
               },
-              "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
-                "projectPath": "a:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj"
+              "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj": {
+                "projectPath": "A:\\PABLO\\UPB\\SEXTO_SEMESTRE\\PRACTICA_INTERNA\\Sistema\\System.Entity\\System.Entity.csproj"
               }
             }
           }
@@ -173,6 +173,22 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

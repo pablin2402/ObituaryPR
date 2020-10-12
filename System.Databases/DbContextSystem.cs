@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Database.Map.WareHouse;
-using System.Entities.WareHouse;
+using System.Databases.Map.WareHouse;
+using System.Entity.WareHouse;
 
 namespace System.Database
 {
@@ -8,6 +9,8 @@ namespace System.Database
     public class DbContextSystem : DbContext
     {
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Article> Articles { get; set; }
+
         public DbContextSystem(DbContextOptions<DbContextSystem> options) : base(options) 
         { 
         
@@ -15,6 +18,8 @@ namespace System.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new MapCategory());
+            modelBuilder.ApplyConfiguration(new MapArticle());
+
 
         }
     }
