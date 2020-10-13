@@ -29,6 +29,17 @@
                 <v-list-item-title>Article </v-list-item-title>
               </v-list-item>
             </v-list-group>
+            <v-list-group :value="true" prepend-icon="mdi-account-circle">
+              <template v-slot:activator>
+                <v-list-item-title>Accesos</v-list-item-title>
+              </template>
+              <v-list-item :to="{ name: 'roles' }">
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-title>Roles </v-list-item-title>
+              </v-list-item>
+            </v-list-group>
           </v-list-item-group>
         </v-list>
       </v-sheet>
