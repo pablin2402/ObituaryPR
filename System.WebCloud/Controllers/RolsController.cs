@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Database;
 using System.Entity.Users;
 using System.WebCloud.DTOModels.Users;
+using System.WebCloud.DTOModels.Users.Rol;
 
 namespace System.WebCloud.Controllers
 {
@@ -37,12 +36,12 @@ namespace System.WebCloud.Controllers
             });
 
         }
-        // GET: api/Roles/Select
+        // GET: api/Rols/Select
         [HttpGet("[action]")]
-        public async Task<IEnumerable<RolDTO>> Select()
+        public async Task<IEnumerable<SelectRolDTO>> Select()
         {
             var rol = await _context.Rols.Where(r => r.condicion == true).ToListAsync();
-            return rol.Select(r => new RolDTO
+            return rol.Select(r => new SelectRolDTO
             {
                 idrol = r.idrol,
                 nombre = r.nombre

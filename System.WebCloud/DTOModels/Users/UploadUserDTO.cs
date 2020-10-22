@@ -1,12 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿
 
-namespace System.Entity.Users
+using System.ComponentModel.DataAnnotations;
+
+namespace System.WebCloud.DTOModels.Users
 {
-    public class User
+    public class UploadUserDTO
     {
+        [Required]
         public int idusuario { get; set; }
-        [ForeignKey("rol")]
+        [Required]
         public int idrol { get; set; }
         [Required]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "El nombre no debe de tener más de 100 caracteres, ni menos de 3 caracteres.")]
@@ -16,16 +18,10 @@ namespace System.Entity.Users
         public string direccion { get; set; }
         public string telefono { get; set; }
         [Required]
+        [EmailAddress]
         public string email { get; set; }
         [Required]
-        public byte[] password_hash { get; set; }
-        [Required]
-        public byte[] password_salt { get; set; }
-        public bool condicion { get; set; }
-
-        public Rol rol { get; set; }
-//        public ICollection<Entry> detalles { get; set; }
-
-
+        public string password { get; set; }
+        public bool act_password { get; set; }
     }
 }

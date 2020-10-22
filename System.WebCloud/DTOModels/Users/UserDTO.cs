@@ -1,8 +1,4 @@
-﻿
-
-using System.Entity.Users;
-
-namespace System.WebCloud.DTOModels.Users
+﻿namespace System.WebCloud.DTOModels.Users
 {
     public class UserDTO
     {

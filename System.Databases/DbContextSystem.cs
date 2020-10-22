@@ -17,6 +17,9 @@ namespace System.Database
         public DbSet<Rol> Rols { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<IncomeDetail> IncomeDetails { get; set; }
+        public DbSet<Entry> Entries { get; set; }
+
 
         public DbContextSystem(DbContextOptions<DbContextSystem> options) : base(options) 
         { 
@@ -29,6 +32,9 @@ namespace System.Database
             modelBuilder.ApplyConfiguration(new MapRol());
             modelBuilder.ApplyConfiguration(new MapUser());
             modelBuilder.ApplyConfiguration(new MapPerson());
+            modelBuilder.ApplyConfiguration(new IncomeDetailMap());
+            modelBuilder.ApplyConfiguration(new MapEntry());
+
 
 
 

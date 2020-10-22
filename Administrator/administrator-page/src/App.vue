@@ -39,6 +39,24 @@
                 </v-list-item-action>
                 <v-list-item-title>Roles </v-list-item-title>
               </v-list-item>
+               <v-list-item :to="{ name: 'users' }">
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-title>Usuarios </v-list-item-title>
+              </v-list-item>
+              <v-list-item :to="{ name: 'clients' }">
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-title>Clientes</v-list-item-title>
+              </v-list-item>
+              <v-list-item :to="{ name: 'proveddores' }">
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-title>Proveedores</v-list-item-title>
+              </v-list-item>
             </v-list-group>
           </v-list-item-group>
         </v-list>

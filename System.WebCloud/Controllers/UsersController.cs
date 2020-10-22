@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Database;
@@ -20,25 +22,26 @@ namespace System.WebCloud.Controllers
             _context = context;
         }
 
+      
         // GET: api/Users/GetUsers 
         [HttpGet("[action]")]
         public async Task<IEnumerable<UserDTO>> GetUsers()
         {
             var usuario = await _context.Users.Include(u => u.rol).ToListAsync();
 
-            return usuario.Select(u => new UserDTO
+            return usuario.Select(c => new UserDTO
             {
-                idusuario = u.idusuario,
-                idrol = u.idrol,
-                rol = u.rol.nombre,
-                nombre = u.nombre,
-                tipo_documento = u.tipo_documento,
-                num_documento = u.num_documento,
-                direccion = u.direccion,
-                telefono = u.telefono,
-                email = u.email,
-                password_hash = u.password_hash,
-                condicion = u.condicion
+                idusuario = c.idusuario,
+                idrol = c.idrol,
+                rol = c.rol.nombre,
+                nombre = c.nombre,
+                tipo_documento = c.tipo_documento,
+                num_documento = c.num_documento,
+                direccion = c.direccion,
+                telefono = c.telefono,
+                email = c.email,
+                password_hash = c.password_hash,
+                condicion = c.condicion
             });
         }
         // POST: api/Users/Crear
@@ -94,18 +97,41 @@ namespace System.WebCloud.Controllers
             }
 
         }
-
-
-       
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        // PUT: api/Users/Actualizar
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Actualizar([FromBody] UploadUserDTO model)
         {
-            if (id != user.idusuario)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (model.idusuario <= 0)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            var usuario = await _context.Users.FirstOrDefaultAsync(u => u.idusuario == model.idusuario);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            usuario.idrol = model.idrol;
+            usuario.nombre = model.nombre;
+            usuario.tipo_documento = model.tipo_documento;
+            usuario.num_documento = model.num_documento;
+            usuario.direccion = model.direccion;
+            usuario.telefono = model.telefono;
+            usuario.email = model.email.ToLower();
+
+            if (model.act_password == true)
+            {
+                CrearPasswordHash(model.password, out byte[] passwordHash, out byte[] passwordSalt);
+                usuario.password_hash = passwordHash;
+                usuario.password_salt = passwordSalt;
+            }
 
             try
             {
@@ -113,20 +139,75 @@ namespace System.WebCloud.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                // Guardar Excepción
+                return BadRequest();
             }
 
-            return NoContent();
+            return Ok();
+        }
+        // PUT: api/Users/Desactivar/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Desactivar([FromRoute] int id)
+        {
+
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var usuario = await _context.Users.FirstOrDefaultAsync(u => u.idusuario == id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            usuario.condicion = false;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
         }
 
+        // PUT: api/Users/Activar/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Activar([FromRoute] int id)
+        {
 
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
+            var usuario = await _context.Users.FirstOrDefaultAsync(u => u.idusuario == id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            usuario.condicion = true;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+
+            return Ok();
+        }
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.idusuario == id);

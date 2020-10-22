@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 
-namespace System.WebCloud.DTOModels.Users
+namespace System.WebCloud.DTOModels.Users.Rol
 {
     public class RolDTO
     {
