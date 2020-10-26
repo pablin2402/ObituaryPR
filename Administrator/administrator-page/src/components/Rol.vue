@@ -8,8 +8,8 @@
         class="elevation-1"
       >
         <template v-slot:top>
-          <v-toolbar flat>
-            <v-toolbar-title>Roles</v-toolbar-title>
+          <v-toolbar text>
+                 <v-toolbar-title>Roles</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
           </v-toolbar>
@@ -67,7 +67,6 @@ export default {
       axios
         .get("Rols/Listar")
         .then(function(response) {
-          console.log(response);
           me.roles = response.data;
         })
         .catch(function(error) {

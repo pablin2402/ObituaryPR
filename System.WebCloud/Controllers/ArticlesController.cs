@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Database;
 using System.Entity.WareHouse;
 using System.WebCloud.DTOModels.WareHouse.Article;
+using Microsoft.AspNetCore.Authorization;
 
 namespace System.WebCloud.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class ArticlesController : ControllerBase
@@ -43,7 +45,6 @@ namespace System.WebCloud.Controllers
             });
         }
 
-        // GET: api/Articles/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Article>> GetArticle(int id)
         {
@@ -68,9 +69,110 @@ namespace System.WebCloud.Controllers
                 condicion = articulo.condicion
             });
         }
+        // GET: api/Articles/BuscarCodigoIngreso/12345678
+        [HttpGet("[action]/{codigo}")]
+        public async Task<IActionResult> BuscarCodigoIngreso([FromRoute] string codigo)
+        {
+
+            var articulo = await _context.Articles.Include(a => a.categoria)
+                .Where(a => a.condicion == true).
+                SingleOrDefaultAsync(a => a.codigo == codigo);
+
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new ArticleDTO
+            {
+                idarticulo = articulo.idarticulo,
+                idcategoria = articulo.idcategoria,
+                categoria = articulo.categoria.nombre,
+                codigo = articulo.codigo,
+                nombre = articulo.nombre,
+                descripcion = articulo.descripcion,
+                stock = articulo.stock,
+                precio_venta = articulo.precio_venta,
+                condicion = articulo.condicion
+            });
+        }
+        // GET: api/Articles/BuscarCodigoVenta/12345678
+        [HttpGet("[action]/{codigo}")]
+        public async Task<IActionResult> BuscarCodigoVenta([FromRoute] string codigo)
+        {
+
+            var articulo = await _context.Articles.Include(a => a.categoria)
+                .Where(a => a.condicion == true)
+                .Where(a => a.stock>0)
+                .SingleOrDefaultAsync(a => a.codigo == codigo);
+
+            if (articulo == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new ArticleDTO
+            {
+                idarticulo = articulo.idarticulo,
+                idcategoria = articulo.idcategoria,
+                categoria = articulo.categoria.nombre,
+                codigo = articulo.codigo,
+                nombre = articulo.nombre,
+                descripcion = articulo.descripcion,
+                stock = articulo.stock,
+                precio_venta = articulo.precio_venta,
+                condicion = articulo.condicion
+            });
+        }
+        // GET: api/Articles/ListarVenta/texto
+        [HttpGet("[action]/{texto}")]
+        public async Task<IEnumerable<ArticleDTO>> ListarVenta([FromRoute] string texto)
+        {
+            var articulo = await _context.Articles.Include(a => a.categoria)
+                .Where(a => a.nombre.Contains(texto))
+                .Where(a => a.condicion == true)
+                .Where(a =>a.stock>0)
+                .ToListAsync();
+
+            return articulo.Select(a => new ArticleDTO
+            {
+                idarticulo = a.idarticulo,
+                idcategoria = a.idcategoria,
+                categoria = a.categoria.nombre,
+                codigo = a.codigo,
+                nombre = a.nombre,
+                stock = a.stock,
+                precio_venta = a.precio_venta,
+                descripcion = a.descripcion,
+                condicion = a.condicion
+            });
+
+        }
+        // GET: api/Articles/ListarIngreso/texto
+        [HttpGet("[action]/{texto}")]
+        public async Task<IEnumerable<ArticleDTO>> ListarIngreso([FromRoute] string texto)
+        {
+            var articulo = await _context.Articles.Include(a => a.categoria)
+                .Where(a => a.nombre.Contains(texto))
+                .Where(a => a.condicion == true)
+                .ToListAsync();
+
+            return articulo.Select(a => new ArticleDTO
+            {
+                idarticulo = a.idarticulo,
+                idcategoria = a.idcategoria,
+                categoria = a.categoria.nombre,
+                codigo = a.codigo,
+                nombre = a.nombre,
+                stock = a.stock,
+                precio_venta = a.precio_venta,
+                descripcion = a.descripcion,
+                condicion = a.condicion
+            });
+
+        }
 
 
-        // PUT: api/Articles/PutArticle
         [HttpPut("[action]")]
         public async Task<IActionResult> PutArticle([FromBody] UploadDTO model)
         {
@@ -111,7 +213,6 @@ namespace System.WebCloud.Controllers
             return Ok();    
         }
 
-        // PUT: api/Articles/PostArticle
 
         [HttpPost("[action]")]
         public async Task<ActionResult<Article>> PostArticle([FromBody] NewDTO model)
@@ -144,8 +245,7 @@ namespace System.WebCloud.Controllers
 
             return Ok();
         }
-        
-        // PUT: api/Articulos/Desactivar/1
+
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {

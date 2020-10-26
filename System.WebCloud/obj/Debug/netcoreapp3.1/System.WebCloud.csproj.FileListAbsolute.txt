@@ -37,6 +37,9 @@ A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\n
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
@@ -59,6 +62,7 @@ A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\n
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.Text.Json.dll
@@ -141,6 +145,8 @@ A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\n
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.csprojAssemblyReference.cache
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.AssemblyInfoInputs.cache
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.AssemblyInfo.cs
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.csproj.CoreCompileInputs.cache
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.MvcApplicationPartsAssemblyInfo.cache
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.RazorTargetAssemblyInfo.cache
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.csproj.CopyComplete
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\staticwebassets\System.WebCloud.StaticWebAssets.Manifest.cache
@@ -148,9 +154,3 @@ A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\n
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.pdb
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.genruntimeconfig.cache
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.csproj.CoreCompileInputs.cache
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.MvcApplicationPartsAssemblyInfo.cache

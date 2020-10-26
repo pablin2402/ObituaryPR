@@ -4,14 +4,16 @@
       <v-data-table
         :headers="headers"
         :items="categories"
-        sort-by="calories"
+                        :search="search"
         class="elevation-1"
       >
         <template v-slot:top>
-          <v-toolbar flat>
+          <v-toolbar text>
             <v-toolbar-title>Categorias</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
+             <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Búsqueda" single-line hide-details></v-text-field>
+                    <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -93,21 +95,21 @@
                   <v-spacer></v-spacer>
                   <v-btn
                     color="green darken-1"
-                    flat="flat"
+                 text
                     @click="activateclose"
                     >Cancelar</v-btn
                   >
                   <v-btn
                     v-if="adAccion == 1"
                     color="orange darken-4"
-                    flat="flat"
+                text
                     @click="activar"
                     >Aceptar</v-btn
                   >
                   <v-btn
                     v-if="adAccion == 2"
                     color="orange darken-4"
-                    flat="flat"
+                 text
                     @click="desactivate"
                     >Aceptar</v-btn
                   >
@@ -156,6 +158,8 @@ export default {
   name: "Categories",
   data: () => ({
     categories: [],
+                    search: '',
+
     dialog: false,
     dialogDelete: false,
     headers: [

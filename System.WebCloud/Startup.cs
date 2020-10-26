@@ -34,6 +34,7 @@ namespace System.WebCloud
                     builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*"));
             });
             services.AddRazorPages();
+           
 
 
         }

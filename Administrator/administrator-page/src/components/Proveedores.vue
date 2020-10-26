@@ -4,13 +4,15 @@
       <v-data-table
         :headers="headers"
         :items="proveedores"
-        sort-by="calories"
+        :search="search"
         class="elevation-1"
       >
         <template v-slot:top>
-          <v-toolbar flat>
+          <v-toolbar text>
             <v-toolbar-title>Proveedores</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
+            <v-spacer></v-spacer>
+            <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Búsqueda" single-line hide-details></v-text-field>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on, attrs }">
@@ -100,13 +102,12 @@
               
             </td>
             <td>{{ props.item.nombre }}</td>
-            <td>{{ props.item.tipo_persona }}</td>
-
-            <td>{{ props.item.tipo_documento }}</td>
-            <td>{{ props.item.num_documento }}</td>
-            <td>{{ props.item.direccion }}</td>
-            <td>{{ props.item.telefono }}</td>
-                        <td>{{ props.item.email }}</td>
+                    <td>{{ props.item.tipo_persona }}</td>
+                    <td>{{ props.item.tipo_documento }}</td>
+                    <td>{{ props.item.num_documento }}</td>
+                    <td>{{ props.item.direccion }}</td>
+                    <td>{{ props.item.telefono }}</td>
+                    <td>{{ props.item.email }}</td>
 
           </tr>
         </template>
@@ -127,19 +128,16 @@ export default {
     proveedores: [],
     dialog: false,
     dialogDelete: false,
-    headers: [
-      { text: "Opciones", value: "opciones", sortable: false },
-      { text: "Nombre", value: "nombre" },
-      { text: "Tipo Persona", value: "tipo_persona", sortable: false },
-      { text: "Tipo Documento", value: "tipo_documento", sortable: false },
-            { text: "Número Documento", value: "num_documento", sortable: false },
-
-      { text: "Direccion", value: "direccion", sortable: false },
-      { text: "Telefono", value: "telefono", sortable: false },
-      { text: "Email", value: "email", sortable: false },
-
-    ],
-    desserts: [],
+   headers: [
+                  { text: 'Opciones', value: 'opciones', sortable: false },
+                    { text: 'Nombre', value: 'nombre' },
+                    { text: 'Tipo Persona', value: 'tipo_persona' },
+                    { text: 'Tipo Documento', value: 'tipo_documento' },
+                    { text: 'Número Documento', value: 'num_documento', sortable: false  },
+                    { text: 'Dirección', value: 'direccion', sortable: false  },
+                    { text: 'Teléfono', value: 'telefono', sortable: false  },
+                    { text: 'Email', value: 'email', sortable: false  }                
+                ],
     editedIndex: -1,
     id: 0,
     idrol:'',
@@ -153,7 +151,7 @@ export default {
     email: '',
     nombre:'',
     descripcion: "",
-    
+    search: '',
     adModal: 0,
     adAccion: 0,
     AdNombre: "",
@@ -176,16 +174,15 @@ export default {
   },
 
   created() {
-    this.listCategories();
+    this.list();
   },
 
   methods: {
-    listCategories() {
+    list() {
       let me = this;
       axios
-        .get("People/ListarProveedores")
+        .get("People/ListarProveedoresDatos")
         .then(function(response) {
-          console.log(response);
           me.proveedores = response.data;
         })
         .catch(function(error) {
@@ -260,7 +257,7 @@ export default {
           .then(function(response) {
             console.log(response);
             me.close();
-            me.listCategories();
+            me.list();
             me.clean();
           })
           .catch(function(error) {
@@ -277,14 +274,13 @@ export default {
             direccion: me.direccion,
             telefono: me.telefono,
             email: me.email,
-            password: me.password,
 
 
           })
           .then(function(response) {
             console.log(response);
             me.close();
-            me.listCategories();
+            me.list();
             me.clean();
           })
           .catch(function(error) {

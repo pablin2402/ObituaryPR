@@ -19,7 +19,9 @@ namespace System.Database
         public DbSet<Person> Persons { get; set; }
         public DbSet<IncomeDetail> IncomeDetails { get; set; }
         public DbSet<Entry> Entries { get; set; }
+        public DbSet<Sale> Sales { get; set; }
 
+        public DbSet<SalesDetails> DetailsSales { get; set; }
 
         public DbContextSystem(DbContextOptions<DbContextSystem> options) : base(options) 
         { 
@@ -34,6 +36,8 @@ namespace System.Database
             modelBuilder.ApplyConfiguration(new MapPerson());
             modelBuilder.ApplyConfiguration(new IncomeDetailMap());
             modelBuilder.ApplyConfiguration(new MapEntry());
+            modelBuilder.ApplyConfiguration(new SaleMap());
+            modelBuilder.ApplyConfiguration(new DetailSaleMap());
 
 
 

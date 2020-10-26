@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Entity.Sales;
 using System.Entity.Users;
 
-namespace System.Entity.WareHouse
+namespace System.Entity.Sales
 {
-    public class Entry
+    public class Sale
     {
         [Key]
-        public int idingreso { get; set; }
-        [Required]
-        public int idproveedor { get; set; }
+
+        public int idventa { get; set; }
         [Required]
         [ForeignKey("usuario")]
+
+        public int idcliente { get; set; }
+        [Required]
+
         public int idusuario { get; set; }
         [Required]
         public string tipo_comprobante { get; set; }
@@ -29,9 +31,8 @@ namespace System.Entity.WareHouse
         [Required]
         public string estado { get; set; }
 
-        public ICollection<IncomeDetail> detalles { get; set; }
+        public ICollection<SalesDetails> detalles { get; set; }
         public User usuario { get; set; }
         public Person persona { get; set; }
-    
     }
 }

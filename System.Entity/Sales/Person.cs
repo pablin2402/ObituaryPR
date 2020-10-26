@@ -18,6 +18,8 @@ namespace System.Entity.Sales
         public string telefono { get; set; }
         public string email { get; set; }
         public ICollection<Entry> ingresos { get; set; }
+        public ICollection<Sale> ventas { get; set; }
+
 
     }
 }

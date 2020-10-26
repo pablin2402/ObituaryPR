@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Entity.Sales;
+using System.Entity.WareHouse;
 
 namespace System.Entity.Users
 {
@@ -24,7 +27,9 @@ namespace System.Entity.Users
         public bool condicion { get; set; }
 
         public Rol rol { get; set; }
-//        public ICollection<Entry> detalles { get; set; }
+        public ICollection<Entry> detalles { get; set; }
+        public ICollection<Sale> ventas { get; set; }
+
 
 
     }

@@ -4,14 +4,16 @@
       <v-data-table
         :headers="headers"
         :items="clientes"
-        sort-by="calories"
         class="elevation-1"
+        :search="search"
       >
         <template v-slot:top>
-          <v-toolbar flat>
+          <v-toolbar text>
             <v-toolbar-title>Clientes</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
+               <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Búsqueda" single-line hide-details></v-text-field>
+                    <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -106,7 +108,7 @@
             <td>{{ props.item.num_documento }}</td>
             <td>{{ props.item.direccion }}</td>
             <td>{{ props.item.telefono }}</td>
-                        <td>{{ props.item.email }}</td>
+            <td>{{ props.item.email }}</td>
 
           </tr>
         </template>
@@ -153,7 +155,8 @@ export default {
     email: '',
     nombre:'',
     descripcion: "",
-    
+                        search: '',
+
     adModal: 0,
     adAccion: 0,
     AdNombre: "",
@@ -176,16 +179,15 @@ export default {
   },
 
   created() {
-    this.listCategories();
+    this.list();
   },
 
   methods: {
-    listCategories() {
+    list() {
       let me = this;
       axios
         .get("People/ListarClientes")
         .then(function(response) {
-          console.log(response);
           me.clientes = response.data;
         })
         .catch(function(error) {
@@ -260,7 +262,7 @@ export default {
           .then(function(response) {
             console.log(response);
             me.close();
-            me.listCategories();
+            me.list();
             me.clean();
           })
           .catch(function(error) {
@@ -284,7 +286,7 @@ export default {
           .then(function(response) {
             console.log(response);
             me.close();
-            me.listCategories();
+            me.list();
             me.clean();
           })
           .catch(function(error) {

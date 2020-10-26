@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Database;
 using System.Entity.WareHouse;
+using System.WebCloud.DTOModels.WareHouse.Entry;
 
 namespace System.WebCloud.Controllers
 {
@@ -21,39 +22,70 @@ namespace System.WebCloud.Controllers
             _context = context;
         }
 
-        // GET: api/Entries
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Entry>>> GetEntries()
+        // GET: api/Entries/Listar
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<EntryDTO>> Listar()
         {
-            return await _context.Entries.ToListAsync();
-        }
+            var ingreso = await _context.Entries
+                .Include(i => i.usuario)
+                .Include(i => i.persona)
+                .OrderByDescending(i => i.idingreso)
+                .Take(100)
+                .ToListAsync();
 
-        // GET: api/Entries/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Entry>> GetEntry(int id)
-        {
-            var entry = await _context.Entries.FindAsync(id);
-
-            if (entry == null)
+            return ingreso.Select(i => new EntryDTO
             {
-                return NotFound();
-            }
+                idingreso = i.idingreso,
+                idproveedor = i.idproveedor,
+                proveedor = i.persona.nombre,
+                idusuario = i.idusuario,
+                usuario = i.usuario.nombre,
+                tipo_comprobante = i.tipo_comprobante,
+                serie_comprobante = i.serie_comprobante,
+                num_comprobante = i.num_comprobante,
+                fecha_hora = i.fecha_hora,
+                impuesto = i.impuesto,
+                total = i.total,
+                estado = i.estado
+            });
 
-            return entry;
         }
-
-        // PUT: api/Entries/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutEntry(int id, Entry entry)
+        // GET: api/Entries/ListarDetalles
+        [HttpGet("[action]/{idingreso}")]
+        public async Task<IEnumerable<DetailEntryDTO>> ListarDetalles([FromRoute] int idingreso)
         {
-            if (id != entry.idingreso)
+            var detalle = await _context.IncomeDetails
+                .Include(a => a.articulo)
+                .Where(d => d.idingreso == idingreso)
+                .ToListAsync();
+
+            return detalle.Select(d => new DetailEntryDTO
+            {
+                idarticulo = d.idarticulo,
+                articulo = d.articulo.nombre,
+                cantidad = d.cantidad,
+                precio = d.precio
+            });
+
+        }
+        // PUT: api/Entries/Anular/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Anular([FromRoute] int id)
+        {
+
+            if (id <= 0)
             {
                 return BadRequest();
             }
 
-            _context.Entry(entry).State = EntityState.Modified;
+            var ingreso = await _context.Entries.FirstOrDefaultAsync(c => c.idingreso == id);
+
+            if (ingreso == null)
+            {
+                return NotFound();
+            }
+
+            ingreso.estado = "Anulado";
 
             try
             {
@@ -61,50 +93,64 @@ namespace System.WebCloud.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EntryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                // Guardar Excepción
+                return BadRequest();
             }
 
-            return NoContent();
+            return Ok();
         }
-
-        // POST: api/Entries
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Entry>> PostEntry(Entry entry)
+        // POST: api/Entries/Crear
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Crear([FromBody] CreateEntryDTO model)
         {
-            _context.Entries.Add(entry);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEntry", new { id = entry.idingreso }, entry);
-        }
-
-        // DELETE: api/Entries/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Entry>> DeleteEntry(int id)
-        {
-            var entry = await _context.Entries.FindAsync(id);
-            if (entry == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest(ModelState);
+            }
+            var fechaHora = DateTime.Now;
+
+            Entry ingreso = new Entry
+            {
+                idproveedor = model.idproveedor,
+                idusuario = model.idusuario,
+                tipo_comprobante = model.tipo_comprobante,
+                serie_comprobante = model.serie_comprobante,
+                num_comprobante = model.num_comprobante,
+                fecha_hora = fechaHora,
+                impuesto = model.impuesto,
+                total = model.total,
+                estado = "Aceptado"
+            };
+
+
+            try
+            {
+                _context.Entries.Add(ingreso);
+                await _context.SaveChangesAsync();
+
+                var id = ingreso.idingreso;
+                foreach (var det in model.detalles)
+                {
+                    IncomeDetail detalle = new IncomeDetail
+                    {
+                        idingreso = id,
+                        idarticulo = det.idarticulo,
+                        cantidad = det.cantidad,
+                        precio = det.precio
+                    };
+                    _context.IncomeDetails.Add(detalle);
+                }
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
             }
 
-            _context.Entries.Remove(entry);
-            await _context.SaveChangesAsync();
-
-            return entry;
+            return Ok();
         }
 
-        private bool EntryExists(int id)
-        {
-            return _context.Entries.Any(e => e.idingreso == id);
-        }
+    
+       
     }
 }

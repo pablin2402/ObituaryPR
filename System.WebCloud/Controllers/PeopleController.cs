@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 
 namespace System.WebCloud.Controllers
 {
@@ -29,6 +30,7 @@ namespace System.WebCloud.Controllers
             _context = context;
         }
         // GET: api/People/ListarClientes
+
         [HttpGet("[action]")]
         public async Task<IEnumerable<PersonDTO>> ListarClientes()
         {
@@ -47,9 +49,25 @@ namespace System.WebCloud.Controllers
             });
 
         }
-        // GET: api/Personas/ListarProveedores
+        // GET: api/People/ListarProveedores
+
         [HttpGet("[action]")]
-        public async Task<IEnumerable<PersonDTO>> ListarProveedores()
+        public async Task<IEnumerable<ProveedorDTO>> ListarProveedores()
+        {
+            var persona = await _context.Persons.Where(p => p.tipo_persona == "Proveedor").ToListAsync();
+
+            return persona.Select(p => new ProveedorDTO
+            {
+                idpersona = p.idpersona,
+                nombre = p.nombre,
+                
+            });
+
+        }
+        // GET: api/People/ListarProveedoresDatos
+
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<PersonDTO>> ListarProveedoresDatos()
         {
             var persona = await _context.Persons.Where(p => p.tipo_persona == "Proveedor").ToListAsync();
 
@@ -70,6 +88,7 @@ namespace System.WebCloud.Controllers
 
 
         // POST: api/Personas/Crear
+
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CreatePersonDTO model)
         {
@@ -109,6 +128,7 @@ namespace System.WebCloud.Controllers
             return Ok();
         }
         // PUT: api/Personas/Actualizar
+
         [HttpPut("[action]")]
         public async Task<IActionResult> Actualizar([FromBody] UploadPeopleDTO model)
         {
@@ -199,7 +219,7 @@ namespace System.WebCloud.Controllers
             var token = new JwtSecurityToken(
               _config["Jwt:Issuer"],
               _config["Jwt:Issuer"],
-              expires: DateTime.Now.AddMinutes(30),
+              expires: DateTime.Now.AddMinutes(1),
               signingCredentials: creds,
               claims: claims);
 

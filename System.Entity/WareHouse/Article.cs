@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace System.Entity.WareHouse
@@ -21,5 +22,6 @@ namespace System.Entity.WareHouse
         public bool condicion { get; set; }
 
         public Category categoria { get; set; }
+        public ICollection<IncomeDetail> DetallesIngreso { get; set; }
     }
 }

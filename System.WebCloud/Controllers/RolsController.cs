@@ -7,9 +7,11 @@ using System.Database;
 using System.Entity.Users;
 using System.WebCloud.DTOModels.Users;
 using System.WebCloud.DTOModels.Users.Rol;
+using Microsoft.AspNetCore.Authorization;
 
 namespace System.WebCloud.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class RolsController : ControllerBase

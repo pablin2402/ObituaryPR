@@ -7,11 +7,14 @@ using System.Database;
 using System.Web.DTOModels.WareHouse.Category;
 using System.Entity.WareHouse;
 using System.WebCloud.DTOModels.WareHouse.Category;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace System.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class CategoriesController : ControllerBase
     {
         private readonly DbContextSystem _context;
