@@ -1,0 +1,7 @@
+{
+  "name": "Remembered forever",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
