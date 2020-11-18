@@ -71,7 +71,8 @@
             <v-tab :to="{ name: 'flowers' }">ENVÍE FLORES</v-tab>
             <v-tab :to="{ name: 'createobituary' }">CREAR UN MEMORIAL</v-tab>
 
-            <v-tab>OBITUARIO</v-tab>
+            <v-tab :to="{ name: 'deceased' }">OBITUARIO</v-tab>
+            <v-tab :to="{ name: 'categories' }">CATEGORIAS</v-tab>
           </v-tabs>
         </template>
       </v-app-bar>
@@ -115,7 +116,7 @@ export default {
 <style>
 /* Helper classes */
 .basil {
-  background-color: #FFFBE6 !important;
+  background-color: #fffbe6 !important;
 }
 .basil--text {
   color: #356859 !important;

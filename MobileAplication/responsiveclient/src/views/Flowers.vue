@@ -90,7 +90,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("https://localhost:44383/api/Articles/List").then((response) => {
+    axios.get("Articles/List").then((response) => {
       console.log(response);
 
       this.flowers = response.data;

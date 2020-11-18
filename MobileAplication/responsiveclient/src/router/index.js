@@ -13,7 +13,7 @@ import CreateItem from "../views/CreateItem.vue";
 import Deceased from "../views/Deceased.vue";
 import CreateObituary from "../components/CreateObituary";
 import DeceasedDetails from "../views/DeceasedDetails.vue";
-
+import Categories from "../components/home/Categories.vue";
 Vue.use(VueRouter);
 
 var router = new VueRouter({
@@ -31,6 +31,16 @@ var router = new VueRouter({
     },
         props: true,
 
+  },
+  {
+    path: "/categories",  
+    name: "categories",
+    component: Categories,
+    meta:{
+      administrador:true,
+      almacenero:true,
+      vendedor:true
+    }
   },
   {
     path: "/accountdetails",  
