@@ -13,5 +13,7 @@ namespace System.WebCloud.DTOModels.WareHouse.Article
         public int stock { get; set; }
         public string descripcion { get; set; }
         public bool condicion { get; set; }
+        public string imagen { get; set; }
+
     }
 }

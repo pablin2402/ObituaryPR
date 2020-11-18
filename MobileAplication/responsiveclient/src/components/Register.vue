@@ -93,21 +93,6 @@
                   maxlength="256"
                 ></v-text-field>
               </v-flex>
-
-              <v-snackbar v-model="snackbar">
-                {{ text }}
-
-                <template v-slot:action="{ attrs }">
-                  <v-btn
-                    color="pink"
-                    text
-                    v-bind="attrs"
-                    @click="snackbar = false"
-                  >
-                    Close
-                  </v-btn>
-                </template>
-              </v-snackbar>
             </v-row>
           </v-container>
         </v-card-text>
@@ -122,24 +107,9 @@
         </v-snackbar>
         <v-divider class="mt-12"></v-divider>
         <v-card-actions>
-          <v-btn text> Cancel </v-btn>
+          <v-btn text :to="{ name: 'home' }"> Cancelar </v-btn>
           <v-spacer></v-spacer>
-          <v-slide-x-reverse-transition>
-            <v-tooltip v-if="formHasErrors" left>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  icon
-                  class="my-0"
-                  v-bind="attrs"
-                  @click="resetForm"
-                  v-on="on"
-                >
-                  <v-icon>mdi-refresh</v-icon>
-                </v-btn>
-              </template>
-              <span>Refresh form</span>
-            </v-tooltip>
-          </v-slide-x-reverse-transition>
+
           <v-btn color="blue darken-1" text @click="save"> Guardar </v-btn>
         </v-card-actions>
       </v-card>

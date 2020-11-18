@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace System.WebCloud.DTOModels.WareHouse.Article
 {
     public class NewDTO
@@ -14,6 +10,7 @@ namespace System.WebCloud.DTOModels.WareHouse.Article
         public decimal precio_venta { get; set; }
         public int stock { get; set; }
         public string descripcion { get; set; }
-        public string condicion { get; set; }
+        public string imagen { get; set; }
+
     }
 }

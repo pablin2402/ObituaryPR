@@ -9,7 +9,7 @@
       >
         <template v-slot:top>
           <v-toolbar text>
-                 <v-toolbar-title>Roles</v-toolbar-title>
+            <v-toolbar-title>Roles</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
           </v-toolbar>
@@ -48,9 +48,9 @@ export default {
     headers: [
       { text: "Nombre", value: "nombre" },
       { text: "Descripcion", value: "descripcion", sortable: false },
-      { text: "Estado", value: "condicion", sortable: false },
+      { text: "Estado", value: "condicion", sortable: false }
     ],
-    search: "",
+    search: ""
   }),
 
   computed: {},
@@ -72,7 +72,7 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-    },
-  },
+    }
+  }
 };
 </script>

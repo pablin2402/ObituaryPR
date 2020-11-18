@@ -8,11 +8,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: null,
-    usuario: null
+    usuario: null,
+    email: null
   },
   mutations: {
     setToken(state,token){
       state.token=token
+    },
+    setEmail(state,email){
+      state.email=email
     },
     setUsuario (state,usuario){
       state.usuario=usuario
@@ -23,6 +27,10 @@ export default new Vuex.Store({
       commit("setToken", token)
       commit("setUsuario", decode(token))
       localStorage.setItem("token", token)
+    },
+    guardarCorreo({commit},email){
+      commit("setEmail",email)
+      localStorage.setItem("email")
     },
     autoLogin({commit}){
       let token = localStorage.getItem("token")

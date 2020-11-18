@@ -1,3 +1,8 @@
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.csprojAssemblyReference.cache
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.AssemblyInfoInputs.cache
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.AssemblyInfo.cs
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.csproj.CoreCompileInputs.cache
+A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.MvcApplicationPartsAssemblyInfo.cache
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\appsettings.Development.json
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\appsettings.json
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -142,11 +147,6 @@ A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\n
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.Entity.dll
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.Databases.pdb
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\bin\Debug\netcoreapp3.1\System.Entity.pdb
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.csprojAssemblyReference.cache
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.AssemblyInfoInputs.cache
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.AssemblyInfo.cs
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.csproj.CoreCompileInputs.cache
-A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.MvcApplicationPartsAssemblyInfo.cache
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.RazorTargetAssemblyInfo.cache
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\System.WebCloud.csproj.CopyComplete
 A:\PABLO\UPB\SEXTO_SEMESTRE\PRACTICA_INTERNA\Sistema\System.WebCloud\obj\Debug\netcoreapp3.1\staticwebassets\System.WebCloud.StaticWebAssets.Manifest.cache

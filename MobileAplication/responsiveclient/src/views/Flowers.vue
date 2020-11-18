@@ -51,7 +51,6 @@
 
               <v-card-text>
                 <v-chip-group
-                  v-model="selection"
                   active-class="deep-purple accent-4 white--text"
                   column
                 >
@@ -66,9 +65,7 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-btn color="deep-purple lighten-2" text @click="reserve">
-                  Reserve
-                </v-btn>
+                <v-btn color="deep-purple lighten-2" text> Reserve </v-btn>
               </v-card-actions>
             </template>
           </v-card>
@@ -89,6 +86,7 @@ export default {
     return {
       flowers: [],
       id: 0,
+      loading: false,
     };
   },
   mounted() {

@@ -20,6 +20,8 @@ namespace System.Entity.WareHouse
         public int stock { get; set; }
         public string descripcion { get; set; }
         public bool condicion { get; set; }
+        public string imagen { get; set; }
+
 
         public Category categoria { get; set; }
         public ICollection<IncomeDetail> DetallesIngreso { get; set; }

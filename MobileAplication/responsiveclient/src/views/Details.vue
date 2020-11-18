@@ -11,25 +11,25 @@
         ></v-carousel-item>
       </v-carousel>
       <v-row>
-        <v-col cols="12" sm="2">
-          <v-sheet rounded="lg" min-height="268">
-            <!--  -->
-          </v-sheet>
-        </v-col>
+        <div>
+          <b-jumbotron>
+            <template #header>{{ name }}</template>
 
-        <v-col cols="12" sm="8">
-          <v-sheet min-height="70vh" rounded="lg">
-            <v-list-item-title class="headline mb-1"
-              >{{ name }}
-            </v-list-item-title>
-          </v-sheet>
-        </v-col>
+            <template #lead>
+              {{ description }}
+            </template>
 
-        <v-col cols="12" sm="2">
-          <v-sheet rounded="lg" min-height="268">
-            <!--  -->
-          </v-sheet>
-        </v-col>
+            <hr class="my-4" />
+
+            <p>
+              It uses utility classes for typography and spacing to space
+              content out within the larger container.
+            </p>
+
+            <b-button variant="primary" href="#">Do Something</b-button>
+            <b-button variant="success" href="#">Do Something Else</b-button>
+          </b-jumbotron>
+        </div>
       </v-row>
     </v-flex>
   </v-layout>

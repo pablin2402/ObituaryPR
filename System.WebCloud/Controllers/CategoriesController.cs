@@ -35,7 +35,8 @@ namespace System.Web.Controllers
                 idcategoria = c.idcategoria,
                 nombre = c.nombre,
                 descripcion = c.descripcion,
-                condicion = c.condicion
+                condicion = c.condicion,
+                imagen = c.imagen
             });
 
         }
@@ -69,10 +70,11 @@ namespace System.Web.Controllers
                 idcategoria = categoria.idcategoria,
                 nombre = categoria.nombre,
                 descripcion = categoria.descripcion,
-                condicion = categoria.condicion
+                condicion = categoria.condicion,
+                imagen =categoria.imagen
             });
         }
-
+        
         // PUT: api/Categories/Put
         [HttpPut("[action]")]
         public async Task<IActionResult> Put([FromBody] CategoryDTO model)
@@ -95,6 +97,7 @@ namespace System.Web.Controllers
 
             categoria.nombre = model.nombre;
             categoria.descripcion = model.descripcion;
+            categoria.imagen = model.imagen;
 
             try
             {
@@ -120,6 +123,7 @@ namespace System.Web.Controllers
             {
                 nombre = model.nombre,
                 descripcion = model.descripcion,
+                imagen= model.imagen,
                 condicion = true
             };
             _context.Categories.Add(categoria);

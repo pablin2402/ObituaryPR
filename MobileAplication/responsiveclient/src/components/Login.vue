@@ -3,9 +3,7 @@
     <v-flex xs12 sm8 md6 lg5 xl4>
       <v-card v-model="valid">
         <v-toolbar dark color="blue darken-3">
-          <v-toolbar-title>
-            Acceso al Sistema
-          </v-toolbar-title>
+          <v-toolbar-title> {{ newMovement }}</v-toolbar-title>
         </v-toolbar>
         <v-card-text>
           <v-text-field
@@ -52,30 +50,38 @@ export default {
       password: "",
       valid: true,
       emailRules: [
-        v => !!v || "El correo electrónico debe ser obligatorio",
-        v => /.+@.+/.test(v) || "El correo debe ser válido"
+        (v) => !!v || "El correo electrónico debe ser obligatorio",
+        (v) => /.+@.+/.test(v) || "El correo debe ser válido",
       ],
       rules: {
-        required: value => !!value || "Requerido.",
-        min: v => v.length >= 8 || "Minimo 8 caracteres"
-      }
+        required: (value) => !!value || "Requerido.",
+        min: (v) => v.length >= 8 || "Minimo 8 caracteres",
+      },
     };
   },
+  name: "caca",
+  props: {
+    newMovement: {
+      type: String,
+    },
+  },
+
   methods: {
     ingresar() {
       axios
         .post("People/Login", { email: this.email, password: this.password })
-        .then(respuesta => {
+        .then((respuesta) => {
           return respuesta.data;
         })
-        .then(data => {
+        .then((data) => {
           this.$store.dispatch("guardarToken", data.token);
-          this.$router.push({ name: "home" });
+
+          this.$router.push({ name: "home", params: { email: this.email } });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
-    }
-  }
+    },
+  },
 };
 </script>

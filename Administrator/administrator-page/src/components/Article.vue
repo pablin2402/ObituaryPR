@@ -4,8 +4,7 @@
       <v-data-table
         :headers="headers"
         :items="articulos"
-                                :search="search"
-
+        :search="search"
         class="elevation-1"
       >
         <template v-slot:top>
@@ -13,8 +12,15 @@
             <v-toolbar-title>Artículos</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
-             <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Búsqueda" single-line hide-details></v-text-field>
-                    <v-spacer></v-spacer>
+            <v-text-field
+              class="text-xs-center"
+              v-model="search"
+              append-icon="search"
+              label="Búsqueda"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -39,6 +45,12 @@
                         <v-text-field
                           v-model="codigo"
                           label="Código"
+                          name="input-10-1"
+                          :rules="[rules.required]"
+                          hint="Por lo menos 8 carácteres"
+                          class="input-group--focused"
+                          counter="50"
+                          maxlength="50"
                         ></v-text-field>
                       </v-flex>
                       <v-flex xs6 sm6 md6>
@@ -46,12 +58,20 @@
                           v-model="idcategoria"
                           :items="categorias"
                           label="Categoría"
+                          :rules="[rules.required]"
+                          class="input-group--focused"
                         ></v-select>
                       </v-flex>
                       <v-flex xs12 sm12 md12>
                         <v-text-field
                           v-model="nombre"
                           label="Nombre"
+                          name="input-10-1"
+                          :rules="[rules.required, rules.min]"
+                          hint="Por lo menos 8 carácteres"
+                          class="input-group--focused"
+                          counter="100"
+                          maxlength="100"
                         ></v-text-field>
                       </v-flex>
                       <v-flex xs6 sm6 md6>
@@ -59,19 +79,43 @@
                           type="number"
                           v-model="stock"
                           label="Stock"
+                          :rules="[rules.required]"
+                          class="input-group--focused"
+                          counter="5"
+                          maxlength="5"
                         ></v-text-field>
                       </v-flex>
                       <v-flex xs12 sm12 md12>
                         <v-text-field
-                          type="number"
                           v-model="precio_venta"
                           label="Precio de Venta"
+                          :rules="[rules.required]"
+                          hint="Por lo menos 1 carácteres"
+                          class="input-group--focused"
+                          counter="11"
+                          maxlength="11"
                         ></v-text-field>
                       </v-flex>
                       <v-flex xs12 sm12 md12>
                         <v-text-field
                           v-model="descripcion"
                           label="Descripcion"
+                          :rules="[rules.required, rules.min]"
+                          hint="Por lo menos 8 carácteres"
+                          class="input-group--focused"
+                          counter="256"
+                          maxlength="5256"
+                        ></v-text-field>
+                      </v-flex>
+                      <v-flex xs12 sm12 md12>
+                        <v-text-field
+                          v-model="imagen"
+                          label="Imagen"
+                          :rules="[rules.required, rules.min]"
+                          hint="Por lo menos 8 carácteres"
+                          class="input-group--focused"
+                          counter="256"
+                          maxlength="256"
                         ></v-text-field>
                       </v-flex>
                     </v-row>
@@ -150,6 +194,7 @@
             <td>{{ props.item.stock }}</td>
             <td>{{ props.item.precio_venta }}</td>
             <td>{{ props.item.descripcion }}</td>
+            <td>{{ props.item.imagen }}</td>
 
             <td>
               <div v-if="props.item.condicion">
@@ -176,6 +221,10 @@ export default {
   name: "Categories",
   data: () => ({
     articulos: [],
+    rules: {
+      required: (value) => !!value || "Requerido.",
+      min: (v) => v.length >= 8 || "Minimo 8 caracteres",
+    },
     dialog: false,
     dialogDelete: false,
     headers: [
@@ -186,18 +235,21 @@ export default {
       { text: "Stock ", value: "stock", sortable: false },
       { text: "Precio de Venta", value: "precio_venta", sortable: false },
       { text: "Descripcion", value: "descripcion", sortable: false },
+      { text: "Imagen", value: "imagen", sortable: false },
+
       { text: "Estado", value: "condicion", sortable: false },
     ],
-                        search: '',
+    search: "",
 
     editedIndex: -1,
     id: 0,
     idcategoria: 0,
     categorias: [],
     nombre: "",
-    codigo: 0,
+    codigo: " ",
     stock: 0,
-    precio_venta: 0,
+    imagen: "",
+    precio_venta: 0.0,
     descripcion: "",
     adModal: 0,
     adAccion: 0,
@@ -230,11 +282,11 @@ export default {
       let me = this;
       axios
         .get("Articles/List")
-        .then(function(response) {
+        .then(function (response) {
           console.log(response);
           me.articulos = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -243,13 +295,13 @@ export default {
       var categoriasArray = [];
       axios
         .get("Categories/Select")
-        .then(function(response) {
+        .then(function (response) {
           categoriasArray = response.data;
-          categoriasArray.map(function(x) {
+          categoriasArray.map(function (x) {
             me.categorias.push({ text: x.nombre, value: x.idcategoria });
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -262,6 +314,7 @@ export default {
       this.stock = item.stock;
       this.precio_venta = item.precio_venta;
       this.descripcion = item.descripcion;
+      this.imagen = item.imagen;
       this.editedIndex = 1;
       this.dialog = true;
     },
@@ -300,20 +353,21 @@ export default {
       this.precio_venta = "";
       this.nombre = "";
       this.descripcion = "";
+      this.imagen = "";
       this.editedIndex = -1;
     },
     activar() {
       let me = this;
       axios
         .put("Articles/Activar/" + this.adId, {})
-        .then(function() {
+        .then(function () {
           me.adModal = 0;
           me.adAccion = 0;
           me.AdNombre = "";
           me.adId = 0;
           me.listCategories();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -321,14 +375,14 @@ export default {
       let me = this;
       axios
         .put("Articles/Desactivar/" + this.adId, {})
-        .then(function() {
+        .then(function () {
           me.adModal = 0;
           me.adAccion = 0;
           me.AdNombre = "";
           me.adId = 0;
           me.listCategories();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -344,14 +398,15 @@ export default {
             stock: me.stock,
             precio_venta: me.precio_venta,
             descripcion: me.descripcion,
+            imagen: me.imagen,
           })
-          .then(function(response) {
+          .then(function (response) {
             console.log(response);
             me.close();
             me.listCategories();
             me.clean();
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log(error);
           });
       } else {
@@ -363,16 +418,18 @@ export default {
             nombre: me.nombre,
             stock: me.stock,
             precio_venta: me.precio_venta,
-            descripcion: me.descripcion,
+
+            imagen: me.imagen,
           })
-          .then(function(response) {
+          .then(function (response) {
             console.log(response);
             me.close();
             me.listCategories();
             me.clean();
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log(error);
+            console.log(me.idcategoria);
           });
       }
     },

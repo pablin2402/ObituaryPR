@@ -3,9 +3,8 @@
     <v-navigation-drawer v-model="drawer" absolute temporary v-if="logueado">
       <v-sheet rounded="lg">
         <v-list nav dense>
-
           <v-list-item-group active-class="deep-purple--text text--accent-4">
-            <template v-if ="esAdministrador || esAlmacenero || esVendedor">
+            <template v-if="esAdministrador || esAlmacenero || esVendedor">
               <v-list-item :to="{ name: 'home' }">
                 <v-list-item-action>
                   <v-icon>home</v-icon>
@@ -14,7 +13,7 @@
               </v-list-item>
             </template>
             <v-divider class="my-2"></v-divider>
-            <template v-if ="esAdministrador || esAlmacenero ">
+            <template v-if="esAdministrador || esAlmacenero">
               <v-list-group :value="true" prepend-icon="mdi-account-circle">
                 <template v-slot:activator>
                   <v-list-item-title>Almacen</v-list-item-title>
@@ -31,9 +30,15 @@
                   </v-list-item-action>
                   <v-list-item-title>Article </v-list-item-title>
                 </v-list-item>
+                <v-list-item :to="{ name: 'mortuary' }">
+                  <v-list-item-action>
+                    <v-icon>shopping_bag</v-icon>
+                  </v-list-item-action>
+                  <v-list-item-title>Funerarias </v-list-item-title>
+                </v-list-item>
               </v-list-group>
-             </template>
-            <template v-if ="esAdministrador">
+            </template>
+            <template v-if="esAdministrador">
               <v-list-group :value="true" prepend-icon="mdi-account-circle">
                 <template v-slot:activator>
                   <v-list-item-title>Accesos</v-list-item-title>
@@ -64,26 +69,25 @@
                 </v-list-item>
               </v-list-group>
             </template>
-      
-            <template v-if ="esAdministrador || esAlmacenero || esVendedor">
+
+            <template v-if="esAdministrador || esAlmacenero || esVendedor">
               <v-list-group :value="true" prepend-icon="mdi-account-circle">
                 <template v-slot:activator>
                   <v-list-item-title>Ventas</v-list-item-title>
                 </template>
-               
+
                 <v-list-item :to="{ name: 'ingresos' }">
                   <v-list-item-action>
                     <v-icon>monetization_on</v-icon>
                   </v-list-item-action>
                   <v-list-item-title>Ingresos</v-list-item-title>
                 </v-list-item>
-                 <v-list-item :to="{ name: 'ventas' }">
+                <v-list-item :to="{ name: 'ventas' }">
                   <v-list-item-action>
                     <v-icon>shopping_cart</v-icon>
                   </v-list-item-action>
                   <v-list-item-title>Ventas</v-list-item-title>
                 </v-list-item>
-                
               </v-list-group>
             </template>
           </v-list-item-group>
@@ -95,10 +99,10 @@
 
       <v-toolbar-title>Obituary</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn @click="salir" v-if="logueado" >
+      <v-btn @click="salir" v-if="logueado">
         <v-icon>logout</v-icon>Salir
       </v-btn>
-      <v-btn :to="{name:'login'}" v-else >
+      <v-btn :to="{ name: 'login' }" v-else>
         <v-icon>apps</v-icon>Ingresar
       </v-btn>
     </v-app-bar>
@@ -125,25 +129,33 @@ export default {
   components: {},
 
   data: () => ({ drawer: null }),
-   computed: {
-    logueado(){
+  computed: {
+    logueado() {
       return this.$store.state.usuario;
     },
-    esAdministrador(){
-      return this.$store.state.usuario && this.$store.state.usuario.rol =='Administrador';
+    esAdministrador() {
+      return (
+        this.$store.state.usuario &&
+        this.$store.state.usuario.rol == "Administrador"
+      );
     },
-    esAlmacenero(){
-      return this.$store.state.usuario && this.$store.state.usuario.rol =='Almacenero';
+    esAlmacenero() {
+      return (
+        this.$store.state.usuario &&
+        this.$store.state.usuario.rol == "Almacenero"
+      );
     },
-    esVendedor(){
-      return this.$store.state.usuario && this.$store.state.usuario.rol =='Vendedor';
+    esVendedor() {
+      return (
+        this.$store.state.usuario && this.$store.state.usuario.rol == "Vendedor"
+      );
     }
   },
-  created(){
+  created() {
     this.$store.dispatch("autoLogin");
   },
-  methods:{
-    salir(){
+  methods: {
+    salir() {
       this.$store.dispatch("salir");
     }
   }

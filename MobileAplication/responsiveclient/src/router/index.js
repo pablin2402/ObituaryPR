@@ -4,10 +4,16 @@ import Flowers from "../views/Flowers.vue";
 import Home from "../views/Home.vue";
 import store from "../store/store";
 import Login from "../components/Login.vue";
+import AccountDetails from "../components/AccountDetails.vue";
+
 import Register from "../components/Register.vue";
 import Create from "../views/Create.vue";
 import Details from "../views/Details.vue";
 import CreateItem from "../views/CreateItem.vue";
+import Deceased from "../views/Deceased.vue";
+import CreateObituary from "../components/CreateObituary";
+import DeceasedDetails from "../views/DeceasedDetails.vue";
+
 Vue.use(VueRouter);
 
 var router = new VueRouter({
@@ -22,6 +28,38 @@ var router = new VueRouter({
       administrador:true,
       almacenero:true,
       vendedor:true
+    },
+        props: true,
+
+  },
+  {
+    path: "/accountdetails",  
+    name: "accountdetails",
+    component: AccountDetails,
+    meta:{
+      administrador:true,
+      almacenero:true,
+      vendedor:true
+    }
+  },
+   {
+    path: "/deceased",  
+    name: "deceased",
+    component: Deceased,
+    meta:{
+      administrador:true,
+      almacenero:true,
+      vendedor:true
+    }
+  },
+  {
+    path: "/createobituary",  
+    name: "createobituary",
+    component: CreateObituary,
+    meta:{
+      administrador:true,
+      almacenero:true,
+      vendedor:true
     }
   },
   {
@@ -29,6 +67,17 @@ var router = new VueRouter({
     name: "details",
     props: true,
     component: Details,
+    meta:{
+      administrador:true,
+      almacenero:true,
+      vendedor:true
+    }
+  },
+    {
+    path: "/deceaseddetails/:id",  
+    name: "deceaseddetails",
+    props: true,
+    component: DeceasedDetails,
     meta:{
       administrador:true,
       almacenero:true,
@@ -81,7 +130,8 @@ var router = new VueRouter({
     component: Login,
     meta:{
       libre:true,
-     }
+     },
+
   }]
 })
 

@@ -84,11 +84,7 @@ namespace System.WebCloud.Controllers
             });
 
         }
-
-
-
         // POST: api/Personas/Crear
-
         [HttpPost("[action]")]
         public async Task<IActionResult> Crear([FromBody] CreatePersonDTO model)
         {
@@ -199,8 +195,30 @@ namespace System.WebCloud.Controllers
             };
 
             return Ok(
-                    new { token = GenerarToken(claims) }
+                    new { 
+                    token = GenerarToken(claims),
+                    email = usuario.email
+                    }
                 );
+
+        }
+        // api/People/BuscarPersona/
+        [HttpGet("[action]/{id}")]
+        public async Task<IEnumerable<UserDetailsDTO>> BuscarPersona([FromRoute]string id)
+        {
+            var persona = await _context.Persons.Where(p => p.email == id).ToListAsync();
+
+            return persona.Select(p => new UserDetailsDTO
+            {
+                nombre = p.nombre,
+                tipo_documento = p.tipo_documento,
+                num_documento = p.num_documento,
+                direccion = p.direccion,
+                telefono = p.telefono,
+                email = p.email
+             
+
+            });
 
         }
         private bool VerificarPasswordHash(string password, byte[] passwordHashAlmacenado, byte[] passwordSalt)

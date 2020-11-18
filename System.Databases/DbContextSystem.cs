@@ -22,6 +22,10 @@ namespace System.Database
         public DbSet<Sale> Sales { get; set; }
 
         public DbSet<SalesDetails> DetailsSales { get; set; }
+        public DbSet<Mortuary> Mortuaries { get; set; }
+        public DbSet<DeathPeople> DeathPeoples { get; set; }
+        public DbSet<Condolence> Condolences { get; set; }
+
 
         public DbContextSystem(DbContextOptions<DbContextSystem> options) : base(options) 
         { 
@@ -38,6 +42,9 @@ namespace System.Database
             modelBuilder.ApplyConfiguration(new MapEntry());
             modelBuilder.ApplyConfiguration(new SaleMap());
             modelBuilder.ApplyConfiguration(new DetailSaleMap());
+            modelBuilder.ApplyConfiguration(new MapMortuary());
+            modelBuilder.ApplyConfiguration(new MapFallecido());
+            modelBuilder.ApplyConfiguration(new MapCondolence());
 
 
 

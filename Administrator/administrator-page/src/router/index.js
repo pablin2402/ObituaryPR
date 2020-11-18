@@ -10,6 +10,7 @@ import Proveedores from "../components/Proveedores.vue";
 import Login from "../components/Login.vue";
 import Entry from "../components/Entry.vue";
 import Sales from "../components/Sales.vue";
+import Mortuary from "../components/Mortuary.vue";
 
 import store from "../store/store";
 Vue.use(VueRouter);
@@ -32,6 +33,15 @@ var router = new VueRouter({
     path: "/categories",
     name: "categories",
     component: Categories,
+    meta:{
+      administrador:true,
+      almacenero:true,
+    }
+  },
+  {
+    path: "/mortuary",
+    name: "mortuary",
+    component: Mortuary,
     meta:{
       administrador:true,
       almacenero:true,

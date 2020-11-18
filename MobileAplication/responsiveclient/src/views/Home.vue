@@ -2,6 +2,32 @@
   <v-layout align-start>
     <v-flex>
       <v-row dense>
+        <v-col
+          cols="12"
+          sm="4"
+          ls="12"
+          v-for="filer of files"
+          :key="filer.nombre"
+        >
+          <v-card class="mx-auto" max-width="344">
+            <v-card-text>
+              <div>BIENVENIDO</div>
+              <p class="display-1 text--primary">{{ filer.nombre }}</p>
+            </v-card-text>
+            <v-card-actions>
+              <router-link
+                :to="{
+                  name: 'accountdetails',
+                  params: { email: filer.email },
+                }"
+              >
+                <v-btn text color="teal accent-4" @click="reveal = true">
+                  VER MIS DATOS
+                </v-btn>
+              </router-link>
+            </v-card-actions>
+          </v-card>
+        </v-col>
         <v-container v-if="loading">
           <div class="text-xs-center">
             <v-progress-circular
@@ -13,6 +39,7 @@
             </v-progress-circular>
           </div>
         </v-container>
+
         <v-col
           cols="12"
           sm="4"
@@ -30,6 +57,7 @@
             </template>
 
             <v-img :src="post.imagen"></v-img>
+
             <router-link :to="{ name: 'details', params: { id: post } }">
               <v-card-title>{{ post.nombre }}</v-card-title>
             </router-link>
@@ -62,7 +90,6 @@
 
             <v-card-text>
               <v-chip-group
-                v-model="selection"
                 active-class="deep-purple accent-4 white--text"
                 column
               >
@@ -77,16 +104,12 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn color="deep-purple lighten-2" text @click="reserve">
-                Reserve
-              </v-btn>
-              <v-btn round color="green" @click="singleMovie(post.nombre)"
-                >View</v-btn
-              >
+              <v-btn rounded color="green">View</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
+      <subscribe />
     </v-flex>
   </v-layout>
 </template>
@@ -97,10 +120,13 @@ import axios from "axios";
 
 export default {
   name: "Home",
-  components: {},
+  components: { Subscribe: () => import("@/components/Subscribe") },
+
   data() {
     return {
       mortuary: [],
+      files: [],
+      email: this.$route.params.email,
       id: 0,
       info: null,
       loading: true,
@@ -111,6 +137,7 @@ export default {
     await axios
       .get("https://localhost:44383/api/Mortuaries/GetMortuaries")
       .then((response) => {
+        this.accountdetails();
         this.mortuary = response.data;
         this.loading = false;
       })
@@ -121,8 +148,17 @@ export default {
       .finally(() => (this.loading = false));
   },
   methods: {
-    singleMovie(id) {
-      this.$router.push("/details/" + id);
+    accountdetails() {
+      axios
+        .get("People/BuscarPersona/" + this.email)
+        .then((response) => {
+          console.log(response);
+          this.files = response.data;
+          this.$store.dispatch("guardarCorreo", response.email);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

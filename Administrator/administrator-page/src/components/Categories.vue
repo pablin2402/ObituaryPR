@@ -4,7 +4,7 @@
       <v-data-table
         :headers="headers"
         :items="categories"
-                        :search="search"
+        :search="search"
         class="elevation-1"
       >
         <template v-slot:top>
@@ -12,9 +12,16 @@
             <v-toolbar-title>Categorias</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
-             <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Búsqueda" single-line hide-details></v-text-field>
-                    <v-spacer></v-spacer>
-            <v-dialog v-model="dialog" max-width="500px">
+            <v-text-field
+              class="text-xs-center"
+              v-model="search"
+              append-icon="search"
+              label="Búsqueda"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-dialog v-model="dialog" max-width="800px">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   color="primary"
@@ -38,13 +45,42 @@
                         <v-text-field
                           v-model="nombre"
                           label="Nombre"
+                          name="input-10-1"
+                          :rules="[rules.required, rules.min]"
+                          hint="Por lo menos 8 carácteres"
+                          class="input-group--focused"
+                          counter="50"
+                          maxlength="50"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="descripcion"
                           label="Descripcion"
+                          :rules="[rules.required, rules.min]"
+                          hint="Por lo menos 8 carácteres"
+                          class="input-group--focused"
+                          counter="256"
+                          maxlength="256"
                         ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="imagen"
+                          label="Imagen"
+                          :rules="[rules.required, rules.min]"
+                          hint="Por lo menos 8 carácteres"
+                          class="input-group--focused"
+                          counter="256"
+                          maxlength="256"
+                        >
+                          <template v-slot:label>
+                            What about <strong>icon</strong> here?
+                            <v-icon style="vertical-align: middle">
+                              mdi-file-find
+                            </v-icon>
+                          </template>
+                        </v-text-field>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -93,23 +129,20 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn
-                    color="green darken-1"
-                 text
-                    @click="activateclose"
+                  <v-btn color="green darken-1" text @click="activateclose"
                     >Cancelar</v-btn
                   >
                   <v-btn
                     v-if="adAccion == 1"
                     color="orange darken-4"
-                text
+                    text
                     @click="activar"
                     >Aceptar</v-btn
                   >
                   <v-btn
                     v-if="adAccion == 2"
                     color="orange darken-4"
-                 text
+                    text
                     @click="desactivate"
                     >Aceptar</v-btn
                   >
@@ -133,6 +166,8 @@
             </td>
             <td>{{ props.item.nombre }}</td>
             <td>{{ props.item.descripcion }}</td>
+            <td>{{ props.item.imagen }}</td>
+
             <td>
               <div v-if="props.item.condicion">
                 <span class="blue--text">Active</span>
@@ -158,31 +193,38 @@ export default {
   name: "Categories",
   data: () => ({
     categories: [],
-                    search: '',
-
+    search: "",
+    rules: {
+      required: value => !!value || "Requerido.",
+      min: v => v.length >= 8 || "Minimo 8 caracteres"
+    },
     dialog: false,
     dialogDelete: false,
     headers: [
       { text: "Opciones", value: "opciones", sortable: false },
       { text: "Nombre", value: "nombre" },
       { text: "Descripcion", value: "descripcion", sortable: false },
-      { text: "Estado", value: "condicion", sortable: false },
+      { text: "Imagen", value: "imagen", sortable: false },
+
+      { text: "Estado", value: "condicion", sortable: false }
     ],
     desserts: [],
     editedIndex: -1,
     id: 0,
     nombre: "",
     descripcion: "",
+    imagen: "",
+
     adModal: 0,
     adAccion: 0,
     AdNombre: "",
-    adId: 0,
+    adId: 0
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Category" : "Edit Category";
-    },
+      return this.editedIndex === -1 ? "Nueva Categoría" : "Editar Categoría";
+    }
   },
 
   watch: {
@@ -191,7 +233,7 @@ export default {
     },
     dialogDelete(val) {
       val || this.closeDelete();
-    },
+    }
   },
 
   created() {
@@ -216,6 +258,7 @@ export default {
       this.id = item.idcategoria;
       this.nombre = item.nombre;
       this.descripcion = item.descripcion;
+      this.imagen = item.imagen;
       this.editedIndex = 1;
       this.dialog = true;
     },
@@ -259,6 +302,7 @@ export default {
       this.id = "";
       this.nombre = "";
       this.descripcion = "";
+      this.imagen = "";
       this.editedIndex = -1;
     },
     activar() {
@@ -299,6 +343,7 @@ export default {
             idcategoria: me.id,
             nombre: me.nombre,
             descripcion: me.descripcion,
+            imagen: me.imagen
           })
           .then(function(response) {
             console.log(response);
@@ -315,6 +360,7 @@ export default {
           .post("Categories/Post", {
             nombre: me.nombre,
             descripcion: me.descripcion,
+            imagen: me.imagen
           })
           .then(function(response) {
             console.log(response);
@@ -326,7 +372,7 @@ export default {
             console.log(error);
           });
       }
-    },
-  },
+    }
+  }
 };
 </script>

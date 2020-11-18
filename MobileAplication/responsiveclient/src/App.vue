@@ -7,12 +7,22 @@
             <template>
               <v-list-item :to="{ name: 'home' }">
                 <v-list-item-action>
-                  <v-icon>home</v-icon>
+                  <v-icon>mdi-home</v-icon>
                 </v-list-item-action>
                 <v-list-item-title>Inicio </v-list-item-title>
               </v-list-item>
+              <v-list-item :to="{ name: 'accountdetails' }">
+                <v-list-item-action>
+                  <v-icon>mdi-home</v-icon>
+                </v-list-item-action>
+                <v-list-item-title>Mis Datos </v-list-item-title>
+              </v-list-item>
             </template>
             <v-divider class="my-2"></v-divider>
+            <v-list-item :to="{ name: 'deceased' }">
+              <v-list-item-action> </v-list-item-action>
+              <v-list-item-title>Encontrar un obituario </v-list-item-title>
+            </v-list-item>
             <v-list-item :to="{ name: 'flowers' }">
               <v-list-item-action> </v-list-item-action>
               <v-list-item-title>Flores </v-list-item-title>
@@ -59,6 +69,8 @@
           >
             <v-tab :to="{ name: 'home' }">INICIO</v-tab>
             <v-tab :to="{ name: 'flowers' }">ENVÍE FLORES</v-tab>
+            <v-tab :to="{ name: 'createobituary' }">CREAR UN MEMORIAL</v-tab>
+
             <v-tab>OBITUARIO</v-tab>
           </v-tabs>
         </template>

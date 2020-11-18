@@ -41,12 +41,13 @@ namespace System.WebCloud.Controllers
                 stock = a.stock,
                 precio_venta = a.precio_venta,
                 descripcion = a.descripcion,
-                condicion = a.condicion
+                condicion = a.condicion,
+                imagen = a.imagen
             });
         }
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Article>> GetArticle(int id)
+        //Articles/GetArticle/
+        [HttpGet("[action]/{id}")]
+        public async Task<ActionResult> GetArticle([FromRoute]int id)
         {
             var articulo = await _context.Articles.Include(a => a.categoria).
                SingleOrDefaultAsync(a => a.idarticulo == id);
@@ -66,7 +67,8 @@ namespace System.WebCloud.Controllers
                 descripcion = articulo.descripcion,
                 stock = articulo.stock,
                 precio_venta = articulo.precio_venta,
-                condicion = articulo.condicion
+                condicion = articulo.condicion,
+                imagen = articulo.imagen
             });
         }
         // GET: api/Articles/BuscarCodigoIngreso/12345678
@@ -93,7 +95,8 @@ namespace System.WebCloud.Controllers
                 descripcion = articulo.descripcion,
                 stock = articulo.stock,
                 precio_venta = articulo.precio_venta,
-                condicion = articulo.condicion
+                condicion = articulo.condicion,
+                imagen = articulo.imagen
             });
         }
         // GET: api/Articles/BuscarCodigoVenta/12345678
@@ -199,6 +202,7 @@ namespace System.WebCloud.Controllers
             articulo.precio_venta = model.precio_venta;
             articulo.stock = model.stock;
             articulo.descripcion = model.descripcion;
+            articulo.imagen = model.imagen;
 
             try
             {
@@ -213,9 +217,9 @@ namespace System.WebCloud.Controllers
             return Ok();    
         }
 
-
+        // GET: api/Articles/PostArticle
         [HttpPost("[action]")]
-        public async Task<ActionResult<Article>> PostArticle([FromBody] NewDTO model)
+        public async Task<IActionResult> PostArticle([FromBody] NewDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -230,7 +234,9 @@ namespace System.WebCloud.Controllers
                 precio_venta = model.precio_venta,
                 stock = model.stock,
                 descripcion = model.descripcion,
-                condicion = true
+                condicion = true,
+                imagen = model.imagen
+
             };
 
             _context.Articles.Add(articulo);
@@ -304,9 +310,6 @@ namespace System.WebCloud.Controllers
         }
 
 
-        private bool ArticuloExists(int id)
-        {
-            return _context.Articles.Any(e => e.idarticulo == id);
-        }
+        
     }
 }
