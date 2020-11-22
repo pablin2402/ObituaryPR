@@ -40,6 +40,20 @@ namespace System.Web.Controllers
             });
 
         }
+        // GET: api/Categories/SelectImage
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<SelectImagenDTO>> SelectImage()
+        {
+            var categoria = await _context.Categories.Where(c => c.condicion == true).ToListAsync();
+
+            return categoria.Select(c => new SelectImagenDTO
+            {
+                idcategoria = c.idcategoria,
+                nombre = c.nombre,
+                imagen = c.imagen
+            });
+
+        }
         // GET: api/Categories/Select
         [HttpGet("[action]")]
         public async Task<IEnumerable<SelectDTO>> Select()

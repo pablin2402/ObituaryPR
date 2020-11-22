@@ -22,8 +22,7 @@
             <hr class="my-4" />
 
             <p>
-              It uses utility classes for typography and spacing to space
-              content out within the larger container.
+              {{ latitud }}
             </p>
 
             <b-button variant="primary" href="#">Do Something</b-button>
@@ -31,25 +30,36 @@
           </b-jumbotron>
         </div>
       </v-row>
+      <Maps :latitude="latitud" :longitude="longitud" :title="name" />
     </v-flex>
   </v-layout>
 </template><script>
 import axios from "axios";
+import Maps from "../components/home/Maps";
 
 export default {
   name: "Details",
-
   props: "id",
-
+  components: {
+    Maps,
+  },
   data() {
     return {
+      center: { lat: 100, lng: 100 },
+      markers: [
+        {
+          position: { lat: 100, lng: 100 },
+          title: "caca",
+        },
+      ],
       singleMovie: "id",
       mortuary: [],
       name: this.$route.params.id.nombre,
       description: this.$route.params.id.descripcion,
       imagen: this.$route.params.id.imagen,
       imagen2: this.$route.params.id.imagen2,
-
+      latitud: this.$route.params.id.posicionx,
+      longitud: this.$route.params.id.posiciony,
       items: [
         {
           src: this.$route.params.id.imagen2,
@@ -60,9 +70,7 @@ export default {
       ],
     };
   },
-  created() {
-    this.select();
-  },
+  created() {},
   mounted() {
     axios
       .get("Articles/GetArticle/")
