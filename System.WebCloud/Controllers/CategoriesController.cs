@@ -36,7 +36,9 @@ namespace System.Web.Controllers
                 nombre = c.nombre,
                 descripcion = c.descripcion,
                 condicion = c.condicion,
-                imagen = c.imagen
+                imagen = c.imagen,
+                link = c.link
+
             });
 
         }
@@ -50,7 +52,8 @@ namespace System.Web.Controllers
             {
                 idcategoria = c.idcategoria,
                 nombre = c.nombre,
-                imagen = c.imagen
+                imagen = c.imagen,
+                link = c.link
             });
 
         }

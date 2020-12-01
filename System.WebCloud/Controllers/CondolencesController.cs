@@ -48,6 +48,28 @@ namespace System.WebCloud.Controllers
              });
 
         }
+        // api/Condolences/GetbyUser
+        [HttpGet("[action]/{id}")]
+        public async Task<IEnumerable<GetCondolenceByUserDTO>> GetbyUser([FromRoute]int id)
+        {
+            var all = await _context.Condolences.
+                                Include(articulo => articulo.usuario).
+                                Include(articulo => articulo.fallecido).
+                                Where(articulo => articulo.idusuario == id).
+                                ToListAsync();
+
+
+            return all.Select(articulo => new GetCondolenceByUserDTO
+            {
+
+                idusuario = articulo.idusuario,
+                fallecido = articulo.fallecido.nombre,
+                titulo = articulo.titulo,
+                mensaje = articulo.mensaje,
+                fecha = articulo.fecha,
+                condicion = articulo.condicion
+            });
+        }
         // api/Condolences/GetbyId
         [HttpGet("[action]/{id}")]
         public async Task<IEnumerable<GetByIdDTO>> GetbyId([FromRoute]int id)

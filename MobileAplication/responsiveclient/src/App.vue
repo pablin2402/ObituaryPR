@@ -5,6 +5,12 @@
         <v-list nav dense>
           <v-list-item-group active-class="deep-purple--text text--accent-4">
             <template>
+              <v-list-item>
+                <v-list-item-action>
+                  <v-icon></v-icon>
+                </v-list-item-action>
+                <v-list-item-title>{{ files }} - {{ rol }}</v-list-item-title>
+              </v-list-item>
               <v-list-item :to="{ name: 'home' }">
                 <v-list-item-action>
                   <v-icon>mdi-home</v-icon>
@@ -13,7 +19,7 @@
               </v-list-item>
               <v-list-item :to="{ name: 'accountdetails' }">
                 <v-list-item-action>
-                  <v-icon>mdi-home</v-icon>
+                  <v-icon>mdi-account</v-icon>
                 </v-list-item-action>
                 <v-list-item-title>Mis Datos </v-list-item-title>
               </v-list-item>
@@ -27,27 +33,21 @@
               <v-list-item-action> </v-list-item-action>
               <v-list-item-title>Flores </v-list-item-title>
             </v-list-item>
-            <v-list-item :to="{ name: 'createitem' }">
+            <v-list-item :to="{ name: 'createobituary' }">
               <v-list-item-action> </v-list-item-action>
-              <v-list-item-title>CREAR ARTÍCULO </v-list-item-title>
+              <v-list-item-title>CREAR OBITUARIO </v-list-item-title>
             </v-list-item>
-            <v-list-item :to="{ name: 'register' }">
-              <v-list-item-action> </v-list-item-action>
-              <v-list-item-title>REGISTRO </v-list-item-title>
-            </v-list-item>
+
             <v-list-item :to="{ name: 'create' }">
               <v-list-item-action> </v-list-item-action>
-              <v-list-item-title>CREA TU ANUNCIO</v-list-item-title>
+              <v-list-item-title>PUBLICA TU NEGOCIO</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list>
       </v-sheet>
     </v-navigation-drawer>
     <v-card class="overflow-hidden">
-      <v-app-bar
-        color="yellow lighten-4
-"
-      >
+      <v-app-bar color="yellow lighten-4">
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
         <v-toolbar-title class="text-center justify-center py-6"
@@ -69,18 +69,13 @@
           >
             <v-tab :to="{ name: 'home' }">INICIO</v-tab>
             <v-tab :to="{ name: 'flowers' }">ENVÍE FLORES</v-tab>
-            <v-tab :to="{ name: 'createobituary' }">CREAR UN MEMORIAL</v-tab>
-
             <v-tab :to="{ name: 'deceased' }">OBITUARIO</v-tab>
-            <v-tab :to="{ name: 'categories' }">CATEGORIAS</v-tab>
           </v-tabs>
         </template>
       </v-app-bar>
       <v-main>
         <v-container fluid fill-height>
-          <v-slide-y-transition mode="out-in">
-            <router-view />
-          </v-slide-y-transition>
+          <router-view />
         </v-container>
       </v-main>
     </v-card>
@@ -88,6 +83,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "App",
 
@@ -96,7 +93,9 @@ export default {
   data: () => ({
     drawer: null,
     tab: null,
-    items: ["Appetizers", "Entrees", "Deserts", "Cocktails"],
+    files: "",
+    filler: "",
+    rol: "",
   }),
   computed: {
     logueado() {
@@ -105,10 +104,31 @@ export default {
   },
   created() {
     this.$store.dispatch("autoLogin");
+    this.getcorreo();
+  },
+  async mounted() {
+    await axios
+      .get("People/BuscarPersona/" + this.filler)
+      .then((response) => {
+        this.files = response.data[0].nombre;
+        this.rol = response.data[0].rol;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   methods: {
     salir() {
+      localStorage.removeItem("correo");
       this.$store.dispatch("salir");
+    },
+    getcorreo() {
+      let datos = localStorage.getItem("correo");
+      if (datos == null) {
+        this.filler = "";
+      } else {
+        this.filler = datos;
+      }
     },
   },
 };

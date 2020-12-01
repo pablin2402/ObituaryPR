@@ -14,6 +14,8 @@ Vue.config.productionTip = false;
 axios.defaults.baseURL = "https://localhost:44383/api/";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
+Vue.use(require('vue-moment'));
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyDmPQrfklKHKfqwIOuQZ92Q7G0TW0AYZG8",

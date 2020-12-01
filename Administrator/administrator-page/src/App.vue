@@ -9,63 +9,58 @@
                 <v-list-item-action>
                   <v-icon>home</v-icon>
                 </v-list-item-action>
-                <v-list-item-title>Inicio </v-list-item-title>
+                <v-list-item-title>INICIO </v-list-item-title>
               </v-list-item>
             </template>
             <v-divider class="my-2"></v-divider>
             <template v-if="esAdministrador || esAlmacenero">
               <v-list-group :value="true" prepend-icon="mdi-account-circle">
                 <template v-slot:activator>
-                  <v-list-item-title>Almacen</v-list-item-title>
+                  <v-list-item-title>SERVICIOS</v-list-item-title>
                 </template>
                 <v-list-item :to="{ name: 'categories' }">
                   <v-list-item-action>
                     <v-icon>shop_two</v-icon>
                   </v-list-item-action>
-                  <v-list-item-title>Category </v-list-item-title>
+                  <v-list-item-title>CATEGORIAS </v-list-item-title>
                 </v-list-item>
                 <v-list-item :to="{ name: 'article' }">
                   <v-list-item-action>
-                    <v-icon>shopping_bag</v-icon>
+                    <v-icon>spa</v-icon>
                   </v-list-item-action>
-                  <v-list-item-title>Article </v-list-item-title>
+                  <v-list-item-title>ARTÍCULOS </v-list-item-title>
                 </v-list-item>
                 <v-list-item :to="{ name: 'mortuary' }">
                   <v-list-item-action>
-                    <v-icon>shopping_bag</v-icon>
+                    <v-icon>local_hospital</v-icon>
                   </v-list-item-action>
-                  <v-list-item-title>Funerarias </v-list-item-title>
+                  <v-list-item-title>FUNERARIAS </v-list-item-title>
                 </v-list-item>
               </v-list-group>
             </template>
             <template v-if="esAdministrador">
               <v-list-group :value="true" prepend-icon="mdi-account-circle">
                 <template v-slot:activator>
-                  <v-list-item-title>Accesos</v-list-item-title>
+                  <v-list-item-title>ACCESOS</v-list-item-title>
                 </template>
                 <v-list-item :to="{ name: 'roles' }">
                   <v-list-item-action>
                     <v-icon>people</v-icon>
                   </v-list-item-action>
-                  <v-list-item-title>Roles </v-list-item-title>
+                  <v-list-item-title>ROLES </v-list-item-title>
                 </v-list-item>
                 <v-list-item :to="{ name: 'users' }">
                   <v-list-item-action>
                     <v-icon>people</v-icon>
                   </v-list-item-action>
-                  <v-list-item-title>Usuarios </v-list-item-title>
+                  <v-list-item-title>USUARIOS </v-list-item-title>
                 </v-list-item>
-                <v-list-item :to="{ name: 'clients' }">
-                  <v-list-item-action>
-                    <v-icon>accessibility</v-icon>
-                  </v-list-item-action>
-                  <v-list-item-title>Clientes</v-list-item-title>
-                </v-list-item>
+
                 <v-list-item :to="{ name: 'proveedores' }">
                   <v-list-item-action>
                     <v-icon>people</v-icon>
                   </v-list-item-action>
-                  <v-list-item-title>Proveedores</v-list-item-title>
+                  <v-list-item-title>PROVEEDORES</v-list-item-title>
                 </v-list-item>
               </v-list-group>
             </template>
@@ -73,20 +68,20 @@
             <template v-if="esAdministrador || esAlmacenero || esVendedor">
               <v-list-group :value="true" prepend-icon="mdi-account-circle">
                 <template v-slot:activator>
-                  <v-list-item-title>Ventas</v-list-item-title>
+                  <v-list-item-title>VENTAS</v-list-item-title>
                 </template>
 
                 <v-list-item :to="{ name: 'ingresos' }">
                   <v-list-item-action>
                     <v-icon>monetization_on</v-icon>
                   </v-list-item-action>
-                  <v-list-item-title>Ingresos</v-list-item-title>
+                  <v-list-item-title>INGRESOS</v-list-item-title>
                 </v-list-item>
                 <v-list-item :to="{ name: 'ventas' }">
                   <v-list-item-action>
                     <v-icon>shopping_cart</v-icon>
                   </v-list-item-action>
-                  <v-list-item-title>Ventas</v-list-item-title>
+                  <v-list-item-title>VENTAS</v-list-item-title>
                 </v-list-item>
               </v-list-group>
             </template>
@@ -94,10 +89,14 @@
         </v-list>
       </v-sheet>
     </v-navigation-drawer>
-    <v-app-bar color="blue" dark>
+    <v-app-bar color="amber accent-2" dark>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Obituary</v-toolbar-title>
+      <v-toolbar-title
+        color="grey"
+        class="font-weight-bold display-1 basil--text"
+        >REMEMBERED FOREVER</v-toolbar-title
+      >
       <v-spacer></v-spacer>
       <v-btn @click="salir" v-if="logueado">
         <v-icon>logout</v-icon>Salir
@@ -149,7 +148,7 @@ export default {
       return (
         this.$store.state.usuario && this.$store.state.usuario.rol == "Vendedor"
       );
-    }
+    },
   },
   created() {
     this.$store.dispatch("autoLogin");
@@ -157,7 +156,7 @@ export default {
   methods: {
     salir() {
       this.$store.dispatch("salir");
-    }
-  }
+    },
+  },
 };
 </script>

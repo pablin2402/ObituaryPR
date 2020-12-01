@@ -7,7 +7,11 @@ namespace System.WebCloud.DTOModels.Users
 {
     public class UserDetailsDTO
     {
+        public int idusuario { get; set; }
         public string nombre { get; set; }
+        public string rol { get; set; }
+
+
         public string tipo_documento { get; set; }
         public string num_documento { get; set; }
         public string direccion { get; set; }

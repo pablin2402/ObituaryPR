@@ -3,7 +3,7 @@
     <v-flex>
       <v-row justify="center">
         <v-col cols="12" sm="12" ls="12">
-          <h2>Crea tu producto</h2>
+          <h2>Publica tu Funeraria</h2>
           <br />
           <v-snackbar v-model="snackbar">
             {{ text }}
@@ -31,13 +31,16 @@
           <v-stepper v-model="e1">
             <v-stepper-header>
               <v-stepper-step :complete="e1 > 1" step="1">
-                Publica tu producto
+                Datos de tu funeraria
               </v-stepper-step>
 
               <v-divider></v-divider>
 
               <v-stepper-step :complete="e1 > 2" step="2">
-                Imagen del producto
+                Dirección de la funeraria
+              </v-stepper-step>
+              <v-stepper-step step="3">
+                Imagenes de la funeraria
               </v-stepper-step>
             </v-stepper-header>
 
@@ -52,39 +55,25 @@
                       :rules="[() => !!codigo || 'El campo es requerido']"
                       required
                     ></v-text-field>
-                    <v-select
-                      v-model="idcategoria"
-                      :items="categorias"
-                      label="Categoría"
-                      class="input-group--focused"
-                    ></v-select>
+
                     <v-text-field
                       v-model="nombre"
                       label="Nombre"
                       required
                     ></v-text-field>
-                    <v-text-field
-                      ref="stock"
-                      type="number"
-                      label="Stock"
-                      v-model="stock"
-                      :rules="[() => !!stock || 'El campo es requerido']"
-                      required
-                      placeholder="Stock"
-                    ></v-text-field>
-                    <v-text-field
-                      ref="precio_venta"
-                      type="number"
-                      label="Precio de Venta"
-                      v-model="precio_venta"
-                      :rules="[() => !!precio_venta || 'El campo es requerido']"
-                      required
-                    ></v-text-field>
+
                     <v-text-field
                       ref="descripcion"
                       v-model="descripcion"
                       label="Descripcion"
                       :rules="[() => !!descripcion || 'El campo es requerido']"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      ref="servicios"
+                      v-model="servicios"
+                      label="Servicios"
+                      :rules="[() => !!servicios || 'El campo es requerido']"
                       required
                     ></v-text-field>
                   </v-card-text>
@@ -96,6 +85,36 @@
 
               <v-stepper-content step="2">
                 <v-card class="mb-12" height="600px">
+                  <v-card class="mb-12" height="1000px">
+                    <v-text-field
+                      ref="posicionx"
+                      v-model="posicionx"
+                      label="Posicion X"
+                      :rules="[() => !!posicionx || 'El campo es requerido']"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      ref="posiciony"
+                      v-model="posiciony"
+                      label="Posicion Y"
+                      :rules="[() => !!posiciony || 'El campo es requerido']"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      ref="direccion"
+                      v-model="direccion"
+                      label="Direccion"
+                      :rules="[() => !!direccion || 'El campo es requerido']"
+                      required
+                    ></v-text-field>
+                  </v-card>
+                </v-card>
+                <v-btn color="primary" @click="e1 = 1"> ATRÁS </v-btn>
+
+                <v-btn color="primary" @click="e1 = 3"> CONTINUAR </v-btn>
+              </v-stepper-content>
+              <v-stepper-content step="3">
+                <v-card class="mb-12" height="500px">
                   <v-text-field
                     ref="imagen"
                     v-model="imagen"
@@ -103,9 +122,17 @@
                     :rules="[() => !!imagen || 'El campo es requerido']"
                     required
                   ></v-text-field>
-                  <v-img :src="imagen" height="400px"></v-img>
+                  <v-img :src="imagen" height="200px"></v-img>
+                  <v-text-field
+                    ref="imagen2"
+                    v-model="imagen2"
+                    label="Imagen 2"
+                    :rules="[() => !!imagen2 || 'El campo es requerido']"
+                    required
+                  ></v-text-field>
+                  <v-img :src="imagen2" height="200px"></v-img>
                 </v-card>
-                <v-btn color="primary" @click="e1 = 1"> ATRÁS </v-btn>
+                <v-btn color="primary" @click="e1 = 2"> ATRÁS </v-btn>
 
                 <v-btn color="primary" text @click="save">
                   PUBLICAR PRODUCTO
@@ -124,7 +151,7 @@
 import axios from "axios";
 
 export default {
-  name: "CreateItem",
+  name: "CreateMortuary",
   components: {},
   data() {
     return {
@@ -132,13 +159,19 @@ export default {
 
       editedIndex: -1,
       id: 0,
+
       idcategoria: 0,
       nombre: "",
       codigo: "",
-      stock: 0,
-      imagen: "",
-      precio_venta: 0,
+      telefono: 0,
       descripcion: "",
+      servicios: "",
+      imagen: "",
+      imagen2: "",
+      posicionx: 0,
+      posiciony: 0,
+      direccion: "",
+
       adModal: 0,
       adAccion: 0,
       AdNombre: "",
@@ -184,14 +217,17 @@ export default {
     save() {
       let me = this;
       axios
-        .post("Articles/PostArticle", {
-          idcategoria: parseInt(me.idcategoria),
+        .post("Mortuaries/PostMortuary", {
+          idcategoria: parseInt(2),
           codigo: me.codigo,
           nombre: me.nombre,
-          stock: parseInt(me.stock),
-          precio_venta: parseInt(me.precio_venta),
           descripcion: me.descripcion,
+          servicios: me.servicios,
           imagen: me.imagen,
+          imagen2: me.imagen2,
+          posicionx: parseInt(me.posicionx),
+          posiciony: parseInt(me.posiciony),
+          direccion: me.direccion,
         })
         .then(function (response) {
           console.log(response);

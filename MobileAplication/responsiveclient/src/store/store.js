@@ -15,9 +15,7 @@ export default new Vuex.Store({
     setToken(state,token){
       state.token=token
     },
-    setEmail(state,email){
-      state.email=email
-    },
+  
     setUsuario (state,usuario){
       state.usuario=usuario
     }
@@ -28,10 +26,7 @@ export default new Vuex.Store({
       commit("setUsuario", decode(token))
       localStorage.setItem("token", token)
     },
-    guardarCorreo({commit},email){
-      commit("setEmail",email)
-      localStorage.setItem("email")
-    },
+   
     autoLogin({commit}){
       let token = localStorage.getItem("token")
       if (token){

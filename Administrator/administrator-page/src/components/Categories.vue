@@ -167,6 +167,7 @@
             <td>{{ props.item.nombre }}</td>
             <td>{{ props.item.descripcion }}</td>
             <td>{{ props.item.imagen }}</td>
+            <td>{{ props.item.link }}</td>
 
             <td>
               <div v-if="props.item.condicion">
@@ -195,8 +196,8 @@ export default {
     categories: [],
     search: "",
     rules: {
-      required: value => !!value || "Requerido.",
-      min: v => v.length >= 8 || "Minimo 8 caracteres"
+      required: (value) => !!value || "Requerido.",
+      min: (v) => v.length >= 8 || "Minimo 8 caracteres",
     },
     dialog: false,
     dialogDelete: false,
@@ -205,8 +206,9 @@ export default {
       { text: "Nombre", value: "nombre" },
       { text: "Descripcion", value: "descripcion", sortable: false },
       { text: "Imagen", value: "imagen", sortable: false },
+      { text: "Link", value: "link", sortable: false },
 
-      { text: "Estado", value: "condicion", sortable: false }
+      { text: "Estado", value: "condicion", sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
@@ -218,13 +220,13 @@ export default {
     adModal: 0,
     adAccion: 0,
     AdNombre: "",
-    adId: 0
+    adId: 0,
   }),
 
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "Nueva Categoría" : "Editar Categoría";
-    }
+    },
   },
 
   watch: {
@@ -233,7 +235,7 @@ export default {
     },
     dialogDelete(val) {
       val || this.closeDelete();
-    }
+    },
   },
 
   created() {
@@ -245,11 +247,11 @@ export default {
       let me = this;
       axios
         .get("Categories/List")
-        .then(function(response) {
+        .then(function (response) {
           console.log(response);
           me.categories = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -309,14 +311,14 @@ export default {
       let me = this;
       axios
         .put("Categories/Activate/" + this.adId, {})
-        .then(function() {
+        .then(function () {
           me.adModal = 0;
           me.adAccion = 0;
           me.AdNombre = "";
           me.adId = 0;
           me.listCategories();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -324,14 +326,14 @@ export default {
       let me = this;
       axios
         .put("Categories/Deactivate/" + this.adId, {})
-        .then(function() {
+        .then(function () {
           me.adModal = 0;
           me.adAccion = 0;
           me.AdNombre = "";
           me.adId = 0;
           me.listCategories();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -343,15 +345,15 @@ export default {
             idcategoria: me.id,
             nombre: me.nombre,
             descripcion: me.descripcion,
-            imagen: me.imagen
+            imagen: me.imagen,
           })
-          .then(function(response) {
+          .then(function (response) {
             console.log(response);
             me.close();
             me.listCategories();
             me.clean();
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log(error);
           });
       } else {
@@ -360,19 +362,19 @@ export default {
           .post("Categories/Post", {
             nombre: me.nombre,
             descripcion: me.descripcion,
-            imagen: me.imagen
+            imagen: me.imagen,
           })
-          .then(function(response) {
+          .then(function (response) {
             console.log(response);
             me.close();
             me.listCategories();
             me.clean();
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log(error);
           });
       }
-    }
-  }
+    },
+  },
 };
 </script>

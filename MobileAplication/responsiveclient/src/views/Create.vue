@@ -59,7 +59,7 @@ export default {
       if (item == "Publica tus productos") {
         this.$router.push({ name: "createitem" });
       } else {
-        this.$router.push({ name: "home" });
+        this.$router.push({ name: "createmortuary" });
       }
     },
   },

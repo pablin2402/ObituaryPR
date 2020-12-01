@@ -18,10 +18,15 @@
           cols="12"
           sm="4"
           ls="12"
+          class="pa-3 d-flex flex-column"
           v-for="post of mortuary"
           :key="post.idpersona"
         >
-          <v-card :loading="loading" class="mx-auto my-12" max-width="500">
+          <v-card
+            :loading="loading"
+            class="elevation-5 flex d-flex flex-column"
+            max-width="500"
+          >
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
                 <router-link
@@ -35,7 +40,10 @@
                   >
                 </router-link>
                 <v-card-subtitle>
-                  ( {{ post.fecha_nacimiento }} - {{ post.fecha_muerte }} )
+                  <strong>
+                    ( {{ post.fecha_nacimiento | moment("YYYY") }} -
+                    {{ post.fecha_muerte | moment("YYYY") }} )</strong
+                  >
                 </v-card-subtitle>
                 <v-card-subtitle>
                   Este sitio web conmemorativo fue creado en memoria de nuestro
@@ -43,18 +51,28 @@
                 </v-card-subtitle>
 
                 <v-card-subtitle
-                  >Creado por {{ post.usuario }}
-                  {{ post.idmuerto }}</v-card-subtitle
+                  >Creado por:
+                  <strong> {{ post.usuario }}</strong></v-card-subtitle
                 >
               </div>
 
-              <v-avatar class="ma-3" size="125" tile>
-                <v-img :src="post.imagen1"></v-img>
+              <v-avatar class="ma-3" size="125" tile round>
+                <v-img :src="post.imagen1" round></v-img>
               </v-avatar>
             </div>
           </v-card>
         </v-col>
       </v-row>
+      <v-btn
+        fab
+        color="yellow"
+        up
+        right
+        absoluteclass="v-btn--example"
+        :to="{ name: 'createobituary' }"
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -107,3 +125,11 @@ export default {
   },
 };
 </script>
+<style>
+/* This is for documentation purposes and will not be needed in your application */
+#lateral .v-btn--example {
+  bottom: 0;
+  position: absolute;
+  margin: 0 0 16px 16px;
+}
+</style>

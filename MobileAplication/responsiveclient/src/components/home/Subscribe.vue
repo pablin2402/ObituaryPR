@@ -5,7 +5,7 @@
         <v-container>
           <v-row>
             <v-col cols="12" md="5">
-              <base-subheading class="mb-3"> Subscribe </base-subheading>
+              <h1 class="mb-3">Subscribe</h1>
 
               <p>
                 Si tienes alguna duda o consulta puedes poner tu dirección de
@@ -29,7 +29,7 @@
             </v-col>
 
             <v-col cols="12" md="6" offset-md="1">
-              <base-subheading>Contacto</base-subheading>
+              <h2>Contacto</h2>
 
               <v-list class="transparent">
                 <v-list-item>

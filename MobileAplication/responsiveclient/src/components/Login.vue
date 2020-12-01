@@ -2,8 +2,8 @@
   <v-layout align-center justify-center>
     <v-flex xs12 sm8 md6 lg5 xl4>
       <v-card v-model="valid">
-        <v-toolbar dark color="blue darken-3">
-          <v-toolbar-title> {{ newMovement }}</v-toolbar-title>
+        <v-toolbar dark color="light-green darken-2">
+          <v-toolbar-title>Iniciar Sesión </v-toolbar-title>
         </v-toolbar>
         <v-card-text>
           <v-text-field
@@ -29,14 +29,24 @@
           >
           </v-text-field>
         </v-card-text>
-        <v-card-actions class="px-3 pb-3">
-          <v-flex text-xs-right>
-            <v-btn @click="ingresar" color="primary" :disabled="!valid"
-              >Ingresar</v-btn
+        <v-card-actions>
+          <v-flex>
+            <v-btn @click="ingresar" outlined rounded text>Ingresar</v-btn>
+            <v-btn outlined rounded text :to="{ name: 'register' }"
+              >Registrate</v-btn
             >
           </v-flex>
         </v-card-actions>
       </v-card>
+      <v-snackbar v-model="snackbar" color="warning">
+        {{ text }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+            Cerrar
+          </v-btn>
+        </template>
+      </v-snackbar>
     </v-flex>
   </v-layout>
 </template>
@@ -49,6 +59,8 @@ export default {
       email: "",
       password: "",
       valid: true,
+      text: "Error en la consulta",
+      snackbar: false,
       emailRules: [
         (v) => !!v || "El correo electrónico debe ser obligatorio",
         (v) => /.+@.+/.test(v) || "El correo debe ser válido",
@@ -60,14 +72,11 @@ export default {
     };
   },
   name: "caca",
-  props: {
-    newMovement: {
-      type: String,
-    },
-  },
 
   methods: {
     ingresar() {
+      let me = this;
+
       axios
         .post("People/Login", { email: this.email, password: this.password })
         .then((respuesta) => {
@@ -75,10 +84,12 @@ export default {
         })
         .then((data) => {
           this.$store.dispatch("guardarToken", data.token);
-
+          localStorage.setItem("correo", this.email);
           this.$router.push({ name: "home", params: { email: this.email } });
         })
         .catch((err) => {
+          me.snackbar = true;
+
           console.log(err);
         });
     },

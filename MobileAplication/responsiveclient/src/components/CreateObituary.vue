@@ -1,209 +1,9 @@
 <template>
   <v-layout align-center justify-center>
-    <v-flex xs12 sm8 md6 lg5 xl4>
-      <v-card class="mx-auto" style="max-width: 2500px">
-        <v-toolbar cards dark flat>
-          <v-card-title class="title font-weight-regular">
-            Crear un Memorial</v-card-title
-          >
-          <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-form ref="form" v-model="form" class="pa-4 pt-6">
-          <v-row align="center">
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                v-model="idusuario"
-                filled
-                color="deep-purple"
-                label="Código Usuario"
-              ></v-text-field
-            ></v-col>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                v-model="nombre"
-                filled
-                :rules="[rules.required]"
-                color="deep-purple"
-                label="Nombres:"
-              ></v-text-field>
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                filled
-                v-model="apellido"
-                :rules="[rules.required]"
-                color="deep-purple"
-                label="Apellidos:"
-              ></v-text-field
-            ></v-col>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                v-model="lugar_nacimiento"
-                filled
-                :rules="[rules.required]"
-                color="deep-purple"
-                label="Lugar de nacimiento:"
-              ></v-text-field>
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="12">
-              <v-menu
-                v-model="menu2"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="fecha_nacimiento"
-                    label="Fecha de Nacimiento"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="fecha_nacimiento"
-                  @input="menu2 = false"
-                ></v-date-picker>
-              </v-menu>
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="12">
-              <v-menu
-                v-model="menu1"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="fecha_muerte"
-                    label="Fecha del deceso"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="fecha_nacimiento"
-                  @input="menu1 = false"
-                ></v-date-picker>
-              </v-menu>
-            </v-col>
-
-            <v-divider></v-divider>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                v-model="imagen1"
-                filled
-                color="deep-purple"
-                label="Imagen 1:"
-              ></v-text-field>
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                v-model="imagen2"
-                filled
-                color="deep-purple"
-                label="Imagen 2:"
-              ></v-text-field>
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                v-model="imagen3"
-                filled
-                color="deep-purple"
-                label="Imagen 3:"
-              ></v-text-field>
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                v-model="imagen4"
-                filled
-                color="deep-purple"
-                label="Imagen 4:"
-              ></v-text-field>
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                v-model="imagen5"
-                filled
-                color="deep-purple"
-                label="Imagen 5:"
-              ></v-text-field>
-            </v-col>
-            <v-divider></v-divider>
-            <v-col class="d-flex" cols="12" sm="12">
-              <v-text-field
-                v-model="descripcion"
-                filled
-                color="deep-purple"
-                label="Descripcion: "
-              ></v-text-field>
-            </v-col>
-
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-text-field
-                v-model="musica"
-                filled
-                color="deep-purple"
-                label="Musica :"
-              ></v-text-field>
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-select
-                v-model="genero"
-                :items="items"
-                filled
-                label="Género"
-              ></v-select>
-            </v-col>
-            <v-col class="d-flex" cols="12" sm="12">
-              <v-select
-                v-model="designacion"
-                :items="items2"
-                filled
-                label="Designación"
-              ></v-select>
-            </v-col>
-            <v-checkbox
-              v-model="agreement"
-              :rules="[rules.required]"
-              color="deep-purple"
-            >
-              <template v-slot:label>
-                Estoy de acuedo con los &nbsp;
-                <a href="#" @click.stop.prevent="dialog = true">
-                  Términos de servicio
-                </a>
-                &nbsp; y &nbsp;
-                <a href="#" @click.stop.prevent="dialog = true">
-                  Políticas de Privacidad. </a
-                >*
-              </template>
-            </v-checkbox>
-          </v-row>
-        </v-form>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-btn text @click="$refs.form.reset()"> Limpiar </v-btn>
-          <v-spacer></v-spacer>
-          <v-btn
-            :disabled="!form"
-            :loading="isLoading"
-            class="white--text"
-            color="deep-purple accent-4"
-            depressed
-            @click="save()"
-          >
-            CREAR
-          </v-btn>
-        </v-card-actions>
+    <v-flex>
+      <v-col cols="12" sm="12" ls="12">
+        <h1 align-center>Crear Obituario</h1>
+        <br />
         <v-snackbar v-model="snackbar">
           {{ text }}
 
@@ -222,27 +22,215 @@
             </v-btn>
           </template>
         </v-snackbar>
-        <v-dialog v-model="dialog" absolute max-width="400" persistent>
-          <v-card>
-            <v-card-title class="headline grey lighten-3"> Legal </v-card-title>
-            <v-card-text> </v-card-text>
+        <v-stepper v-model="e1">
+          <v-stepper-header>
+            <v-stepper-step :complete="e1 > 1" step="1">
+              Sobre tu amado
+            </v-stepper-step>
+
             <v-divider></v-divider>
-            <v-card-actions>
-              <v-btn text @click="(agreement = false), (dialog = false)">
-                No
-              </v-btn>
-              <v-spacer></v-spacer>
+
+            <v-stepper-step :complete="e1 > 2" step="2">
+              Datos del difunto
+            </v-stepper-step>
+
+            <v-divider></v-divider>
+
+            <v-stepper-step step="3"> Cargar imágenes </v-stepper-step>
+          </v-stepper-header>
+
+          <v-stepper-items>
+            <v-stepper-content step="1">
+              <h3>Este memorial está dedicado a:</h3>
+              <v-card class="mb-12" height="500px">
+                <v-row align="center">
+                  <v-col class="d-flex" cols="12" sm="12">
+                    <v-text-field
+                      v-model="nombre"
+                      filled
+                      :rules="[rules.required]"
+                      color="deep-purple"
+                      label="Nombres:"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="d-flex" cols="12" sm="12">
+                    <v-text-field
+                      filled
+                      v-model="apellido"
+                      :rules="[rules.required]"
+                      color="deep-purple"
+                      label="Apellidos:"
+                    ></v-text-field
+                  ></v-col>
+                  <v-col class="d-flex" cols="12" sm="12">
+                    <v-text-field
+                      v-model="lugar_nacimiento"
+                      filled
+                      :rules="[rules.required]"
+                      color="deep-purple"
+                      label="Lugar de nacimiento:"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="d-flex" cols="12" sm="12">
+                    <v-menu
+                      v-model="menu2"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="290px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="fecha_nacimiento"
+                          label="Fecha de Nacimiento"
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="fecha_nacimiento"
+                        @input="menu2 = false"
+                      ></v-date-picker>
+                    </v-menu>
+                  </v-col>
+                  <v-col class="d-flex" cols="12" sm="12">
+                    <v-menu
+                      v-model="menu1"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="290px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="fecha_muerte"
+                          label="Fecha del deceso"
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="fecha_nacimiento"
+                        @input="menu1 = false"
+                      ></v-date-picker>
+                    </v-menu>
+                  </v-col>
+                </v-row>
+              </v-card>
+              <v-btn color="primary" @click="e1 = 2"> Continuar </v-btn>
+              <v-btn text :to="{ name: 'home' }"> Cancelar </v-btn>
+            </v-stepper-content>
+
+            <v-stepper-content step="2">
+              <v-card class="mb-12" height="500px">
+                <v-row align="center">
+                  <v-col class="d-flex" cols="12" sm="12">
+                    <v-text-field
+                      v-model="descripcion"
+                      filled
+                      color="deep-purple"
+                      label="Descripcion: "
+                    ></v-text-field>
+                  </v-col>
+
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-text-field
+                      v-model="musica"
+                      filled
+                      color="deep-purple"
+                      label="Musica :"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-select
+                      v-model="genero"
+                      :items="items"
+                      filled
+                      label="Género"
+                    ></v-select>
+                  </v-col>
+                  <v-col class="d-flex" cols="12" sm="12">
+                    <v-select
+                      v-model="designacion"
+                      :items="items2"
+                      filled
+                      label="Designación"
+                    ></v-select>
+                  </v-col>
+                </v-row>
+              </v-card>
+
+              <v-btn color="primary" @click="e1 = 3"> Continuar </v-btn>
+
+              <v-btn text :to="{ name: 'home' }"> Cancelar </v-btn>
+            </v-stepper-content>
+
+            <v-stepper-content step="3">
+              <v-card class="mb-12" height="500px">
+                <v-row align="center">
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-text-field
+                      v-model="imagen1"
+                      filled
+                      color="deep-purple"
+                      label="Imagen 1:"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-text-field
+                      v-model="imagen2"
+                      filled
+                      color="deep-purple"
+                      label="Imagen 2:"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-text-field
+                      v-model="imagen3"
+                      filled
+                      color="deep-purple"
+                      label="Imagen 3:"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-text-field
+                      v-model="imagen4"
+                      filled
+                      color="deep-purple"
+                      label="Imagen 4:"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-text-field
+                      v-model="imagen5"
+                      filled
+                      color="deep-purple"
+                      label="Imagen 5:"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-card>
+
               <v-btn
+                :loading="isLoading"
                 class="white--text"
-                color="deep-purple accent-4"
-                @click="(agreement = true), (dialog = false)"
+                color="primary"
+                depressed
+                @click="save()"
               >
-                Si
+                CREAR
               </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-card>
+              <v-btn text :to="{ name: 'home' }"> Cancelar </v-btn>
+            </v-stepper-content>
+          </v-stepper-items>
+        </v-stepper>
+      </v-col>
     </v-flex>
   </v-layout>
 </template>
@@ -269,7 +257,7 @@ export default {
     menu2: false,
     modal: false,
     menu1: false,
-
+    e1: 1,
     imagen2: "",
     imagen3: "",
     imagen4: "",

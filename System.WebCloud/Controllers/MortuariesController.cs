@@ -21,7 +21,6 @@ namespace System.WebCloud.Controllers
         {
             _context = context;
         }
-
         // GET: api/Mortuaries/GetMortuaries
         [HttpGet("[action]")]
         public async Task<IEnumerable<MortuaryDTO>> GetMortuaries()
@@ -40,10 +39,61 @@ namespace System.WebCloud.Controllers
                 servicios = a.servicios,
                 imagen = a.imagen,
                 imagen2 = a.imagen2,
-                posicionx= a.posicionx,
-                posiciony=a.posiciony,
+                posicionx = a.posicionx,
+                posiciony = a.posiciony,
                 condicion = a.condicion,
                 direccion = a.direccion
+            });
+        }
+        // POST: api/Mortuaries/PostMortuary
+        [HttpPost("[action]")]
+        public async Task<IActionResult> PostMortuary([FromBody] MortuaryDTO model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            Mortuary mortuary = new Mortuary
+            {
+                idcategoria = 2,
+                codigo = model.codigo,
+                nombre = model.nombre,
+                telefono = model.telefono,
+                descripcion = model.descripcion,
+                servicios = model.servicios,
+                imagen = model.imagen,
+                imagen2 = model.imagen2,
+                posicionx = model.posicionx,
+                posiciony = model.posiciony,
+                condicion = true,
+                direccion = model.direccion
+            };
+            _context.Mortuaries.Add(mortuary);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+
+        // GET: api/Mortuaries/GetMortuariesLocation
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<MortuaryLocationDTO>> GetMortuariesLocation()
+        {
+            var mortuary = await _context.Mortuaries.Include(a => a.categoria).ToListAsync();
+
+            return mortuary.Select(a => new MortuaryLocationDTO
+            {
+               
+                nombre = a.nombre,
+                
+                posicionx = a.posicionx,
+                posiciony = a.posiciony,
+                
             });
         }
         // GET: api/Mortuaries/GetById/

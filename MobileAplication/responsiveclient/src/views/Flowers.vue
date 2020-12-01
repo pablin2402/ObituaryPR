@@ -1,15 +1,20 @@
 <template>
   <v-layout align-start>
     <v-flex>
-      <v-row dense>
+      <v-row align="stretch" class="ma-2">
         <v-col
           cols="12"
           sm="4"
           ls="12"
+          class="pa-3 d-flex flex-column"
           v-for="post of flowers"
           :key="post.idcategoria"
         >
-          <v-card :loading="loading" class="mx-auto my-12" max-width="400">
+          <v-card
+            :loading="loading"
+            class="elevation-5 flex d-flex flex-column"
+            width="400"
+          >
             <template slot="progress">
               <v-progress-linear
                 color="deep-purple"
@@ -17,7 +22,7 @@
                 indeterminate
               ></v-progress-linear>
             </template>
-            <template v-if="post.condicion == true && post.idcategoria == 1002">
+            <template v-if="post.condicion == true">
               <v-img :src="post.imagen"></v-img>
 
               <v-card-title>{{ post.nombre }}</v-card-title>
@@ -55,17 +60,13 @@
                   column
                 >
                   <v-chip>5:30PM</v-chip>
-
-                  <v-chip>7:30PM</v-chip>
-
-                  <v-chip>8:00PM</v-chip>
-
-                  <v-chip>9:00PM</v-chip>
                 </v-chip-group>
               </v-card-text>
 
               <v-card-actions>
-                <v-btn color="deep-purple lighten-2" text> Reserve </v-btn>
+                <v-btn color="deep-purple lighten-2" text>
+                  AÑADIR AL CARRITO
+                </v-btn>
               </v-card-actions>
             </template>
           </v-card>

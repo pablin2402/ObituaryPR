@@ -12,11 +12,17 @@
           </v-progress-circular>
         </div>
       </v-container>
+      <b-form-input
+        type="search"
+        v-model="selectedCategory"
+        placeholder="Busca tu funeraria favorita"
+      ></b-form-input>
+
       <v-col
         cols="12"
         sm="4"
         ls="12"
-        v-for="post of mortuary"
+        v-for="post of filterfuneraries"
         :key="post.idpersona"
       >
         <v-card :loading="loading" class="mx-auto my-12" max-width="500">
@@ -91,13 +97,13 @@ export default {
   data() {
     return {
       mortuary: [],
-      files: [],
       email: this.$route.params.email,
       id: 0,
       loading: true,
 
       info: null,
       errored: false,
+      selectedCategory: "",
     };
   },
   async mounted() {
@@ -112,6 +118,26 @@ export default {
         this.errored = true;
       })
       .finally(() => (this.loading = false));
+  },
+  computed: {
+    filterfuneraries: function () {
+      var self = this;
+      var category = self.selectedCategory;
+      if (category === "All") {
+        return self.mortuary;
+      } else {
+        return this.mortuary.filter(function (lenguaje) {
+          return (
+            lenguaje.nombre
+              .toLowerCase()
+              .indexOf(self.selectedCategory.toLowerCase()) >= 0 ||
+            lenguaje.direccion
+              .toLowerCase()
+              .indexOf(self.selectedCategory.toLowerCase()) >= 0
+          );
+        });
+      }
+    },
   },
 };
 </script>

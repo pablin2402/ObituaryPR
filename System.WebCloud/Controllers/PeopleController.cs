@@ -206,11 +206,13 @@ namespace System.WebCloud.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<IEnumerable<UserDetailsDTO>> BuscarPersona([FromRoute]string id)
         {
-            var persona = await _context.Persons.Where(p => p.email == id).ToListAsync();
+            var persona = await _context.Users.Include(u => u.rol).Where(p => p.email == id).ToListAsync();
 
             return persona.Select(p => new UserDetailsDTO
             {
+                idusuario = p.idusuario,
                 nombre = p.nombre,
+                rol = p.rol.nombre,
                 tipo_documento = p.tipo_documento,
                 num_documento = p.num_documento,
                 direccion = p.direccion,

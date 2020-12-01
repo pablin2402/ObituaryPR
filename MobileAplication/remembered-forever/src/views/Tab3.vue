@@ -12,7 +12,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-card v-for="post of flowers" :key="post.idcategoria">
-        <template v-if="post.condicion == true && post.idcategoria == 1002">
+        <template v-if="post.condicion == true">
           <ion-card-header>
             <ion-card-title>{{ post.nombre }}</ion-card-title>
             <ion-card-subtitle>{{ post.descripcion }}</ion-card-subtitle>
