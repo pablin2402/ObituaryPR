@@ -56,7 +56,7 @@ namespace System.WebCloud.Controllers
         {
             var detalle = await _context.IncomeDetails
                 .Include(a => a.articulo)
-                .Where(d => d.idingreso == idingreso)
+                .Where(d => d.iddetalle_ingreso == idingreso)
                 .ToListAsync();
 
             return detalle.Select(d => new DetailEntryDTO
@@ -132,11 +132,14 @@ namespace System.WebCloud.Controllers
                 foreach (var det in model.detalles)
                 {
                     IncomeDetail detalle = new IncomeDetail
-                    {
+                    {   
                         idingreso = id,
                         idarticulo = det.idarticulo,
                         cantidad = det.cantidad,
-                        precio = det.precio
+                        precio = det.precio,
+                        nombre = det.nombre,
+                        direccion = det.direccion,
+                        telefono = det.telefono
                     };
                     _context.IncomeDetails.Add(detalle);
                 }

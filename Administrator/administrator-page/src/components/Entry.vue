@@ -176,21 +176,10 @@
             >
             </v-select>
           </v-flex>
-          <v-flex xs12 sm4 md4 lg4 xl4>
-            <v-text-field v-model="serie_comprobante" label="Serie Comprobante">
-            </v-text-field>
-          </v-flex>
-          <v-flex xs12 sm4 md4 lg4 xl4>
-            <v-text-field v-model="num_comprobante" label="Número Comprobante">
-            </v-text-field>
-          </v-flex>
+
           <v-flex xs12 sm8 md8 lg8 xl8>
-            <v-select
-              v-model="idproveedor"
-              :items="proveedores"
-              label="Proveedor"
-            >
-            </v-select>
+            <v-text-field v-model="direccion" label="Direccion : ">
+            </v-text-field>
           </v-flex>
           <v-flex xs12 sm4 md4 lg4 xl4>
             <v-text-field type="number" v-model="impuesto" label="Impuesto">
@@ -299,20 +288,20 @@ export default {
       {
         text: "Serie Comprobante",
         value: "serie_comprobante",
-        sortable: false
+        sortable: false,
       },
       { text: "Número Comprobante", value: "num_comprobante", sortable: false },
       { text: "Fecha", value: "fecha_hora", sortable: false },
       { text: "Impuesto", value: "impuesto", sortable: false },
       { text: "Total", value: "total", sortable: false },
-      { text: "Estado", value: "estado", sortable: false }
+      { text: "Estado", value: "estado", sortable: false },
     ],
     cabeceraDetalles: [
       { text: "Borrar", value: "borrar", sortable: false },
       { text: "Artículo", value: "articulo", sortable: false },
       { text: "Cantidad", value: "cantidad", sortable: false },
       { text: "Precio", value: "precio", sortable: false },
-      { text: "Subtotal", value: "subtotal", sortable: false }
+      { text: "Subtotal", value: "subtotal", sortable: false },
     ],
     cabeceraArticulos: [
       { text: "Seleccionar", value: "seleccionar", sortable: false },
@@ -320,28 +309,30 @@ export default {
       { text: "Categoría", value: "categoria" },
       { text: "Descripción", value: "descripcion", sortable: false },
       { text: "Stock", value: "stock", sortable: false },
-      { text: "Precio Venta", value: "precio_venta", sortable: false }
+      { text: "Precio Venta", value: "precio_venta", sortable: false },
     ],
-    detalles: [],
     id: "",
     proveedores: [],
-    tipo_comprobante: "",
     comprobantes: ["FACTURA", "TICKET", "BOLETA", "CEDULA"],
-    serie_comprobante: "",
-    num_comprobante: "",
     verArticulos: false,
     search: "",
     telefono: "",
-    impuesto: 18,
     codigo: "",
+    direccion: "",
     idproveedor: 0,
-    totalParcial: 0,
+    idusuario: 0,
+    tipo_comprobante: "001",
+    serie_comprobante: "0100",
+    num_comprobante: "0010",
+    impuesto: 18,
     total: 0,
+    detalles: [],
+
+    totalParcial: 0,
     totalImpuesto: 0,
     articulos: [],
     texto: "",
     verDet: 0,
-
     //1 o 0
     verNuevo: 0,
     errorArticulo: null,
@@ -351,18 +342,18 @@ export default {
     adModal: 0,
     adAccion: 0,
     adNombre: "",
-    adId: 0
+    adId: 0,
   }),
 
   computed: {
-    calcularTotal: function() {
+    calcularTotal: function () {
       var resultado = 0.0;
       for (var i = 0; i < this.detalles.length; i++) {
         resultado =
           resultado + this.detalles[i].precio * this.detalles[i].cantidad;
       }
       return resultado;
-    }
+    },
   },
 
   watch: {
@@ -371,7 +362,7 @@ export default {
     },
     dialogDelete(val) {
       val || this.closeDelete();
-    }
+    },
   },
 
   created() {
@@ -382,29 +373,39 @@ export default {
   methods: {
     guardar() {
       let me = this;
-      console.log(": " + me.$store.state.usuario.idusuario);
-      let c = me.idproveedor;
-      console.log(c);
+      console.log(me.total);
+
       axios
         .post("Entries/Crear", {
-          idproveedor: 1,
+          idproveedor: parseInt(me.idproveedor),
           idusuario: 2,
           tipo_comprobante: me.tipo_comprobante,
           serie_comprobante: me.serie_comprobante,
           num_comprobante: me.num_comprobante,
-          impuesto: 18,
-          total: 1,
-          detalles: me.detalles
+          impuesto: parseInt(me.impuesto),
+          total: parseInt(me.total),
+          detalles: this.detalles,
         })
-        .then(function() {
+        .then(function () {
           me.ocultarNuevo();
           me.listCategories();
-
           me.clean();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
+    },
+    agregarDetalle(caca) {
+      //console.log(data["idarticulo"]);
+      console.log("caca" + caca.nombre);
+
+      this.detalles.push({
+        idarticulo: parseInt(caca.idarticulo),
+        cantidad: 1,
+        precio: 1,
+        num_comprobante: "1",
+      });
+      //}
     },
     activarDesactivarMostrar(accion, item) {
       this.adModal = 1;
@@ -422,10 +423,10 @@ export default {
       let me = this;
       axios
         .get("Entries/Listar")
-        .then(function(response) {
+        .then(function (response) {
           me.ingresos = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("" + error);
         });
     },
@@ -433,10 +434,10 @@ export default {
       let me = this;
       axios
         .get("Entries/ListarDetalles/" + id)
-        .then(function(response) {
+        .then(function (response) {
           me.detalles = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("" + error);
         });
     },
@@ -447,7 +448,7 @@ export default {
       this.num_comprobante = item.num_comprobante;
       this.idproveedor = item.idproveedor;
       this.impuesto = item.impuesto;
-      this.listDetails(item.idingreso);
+      this.listDetails(item.num_comprobante);
       this.verNuevo = 1;
       this.verDet = 1;
     },
@@ -457,27 +458,15 @@ export default {
       me.errorArticulo = null;
       axios
         .get("Articles/BuscarCodigoIngreso/" + this.codigo)
-        .then(function(response) {
+        .then(function (response) {
           me.agregarDetalle(response.data);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
           me.errorArticulo = "No existe el Artículo";
         });
     },
-    agregarDetalle(data = []) {
-      this.errorArticulo = null;
-      if (this.encuentra(data["idarticulo"])) {
-        this.errorArticulo = "El artículo ya ha sido agregado.";
-      } else {
-        this.detalles.push({
-          idarticulo: data["idarticulo"],
-          articulo: data["nombre"],
-          cantidad: 1,
-          precio: 1
-        });
-      }
-    },
+
     encuentra(id) {
       var sw = 0;
       for (var i = 0; i < this.detalles.length; i++) {
@@ -511,13 +500,13 @@ export default {
       var proveedores = [];
       axios
         .get("People/ListarProveedores")
-        .then(function(response) {
+        .then(function (response) {
           proveedores = response.data;
-          proveedores.map(function(x) {
+          proveedores.map(function (x) {
             me.proveedores.push({ text: x.nombre, value: x.idpersona });
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -526,11 +515,11 @@ export default {
 
       axios
         .get("Articles/ListarIngreso/" + me.texto)
-        .then(function(response) {
+        .then(function (response) {
           //console.log(response);
           me.articulos = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -570,17 +559,17 @@ export default {
 
       axios
         .put("Entries/Anular/" + this.adId)
-        .then(function() {
+        .then(function () {
           me.adModal = 0;
           me.adAccion = 0;
           me.adNombre = "";
           me.adId = "";
           me.listarArticulo();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
-    }
-  }
+    },
+  },
 };
 </script>

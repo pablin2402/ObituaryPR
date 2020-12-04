@@ -7,6 +7,7 @@ namespace System.WebCloud.DTOModels.WareHouse.Entry
     {
         [Required]
         public int idarticulo { get; set; }
+
         public string articulo { get; set; }
         [Required]
         public int cantidad { get; set; }

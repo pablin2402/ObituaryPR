@@ -274,7 +274,7 @@
               hide-default-footer
               class="elevation-1"
             >
-              <template v-slot:item="props">
+              <template slot="items" slot-scope="props">
                 <td class="justify-center layout px-0">
                   <v-icon
                     medium
@@ -286,27 +286,18 @@
                 </td>
                 <td>{{ props.item.articulo }}</td>
                 <td>
-                  <v-text-field
-                    type="number"
-                    v-model.number="props.item.cantidad"
-                  ></v-text-field>
+                  {{ props.item.cantidad }}
                 </td>
                 <td>
-                  <v-text-field
-                    type="number"
-                    v-model.number="props.item.precio"
-                  ></v-text-field>
+                  {{ props.item.precio }}
                 </td>
                 <td>
-                  <v-text-field
-                    type="number"
-                    v-model.number="props.item.descuento"
-                  ></v-text-field>
+                  {{ props.item.descuento }}
                 </td>
                 <td>
                   ${{
                     props.item.cantidad * props.item.precio -
-                      props.item.descuento
+                    props.item.descuento
                   }}
                 </td>
               </template>
@@ -364,13 +355,13 @@ export default {
       {
         text: "Serie Comprobante",
         value: "serie_comprobante",
-        sortable: false
+        sortable: false,
       },
       { text: "Número Comprobante", value: "num_comprobante", sortable: false },
       { text: "Fecha", value: "fecha_hora", sortable: false },
       { text: "Impuesto", value: "impuesto", sortable: false },
       { text: "Total", value: "total", sortable: false },
-      { text: "Estado", value: "estado", sortable: false }
+      { text: "Estado", value: "estado", sortable: false },
     ],
     cabeceraDetalles: [
       { text: "Borrar", value: "borrar", sortable: false },
@@ -378,7 +369,7 @@ export default {
       { text: "Cantidad", value: "cantidad", sortable: false },
       { text: "Precio", value: "precio", sortable: false },
       { text: "Descuento", value: "descuento", sortable: false },
-      { text: "Subtotal", value: "subtotal", sortable: false }
+      { text: "Subtotal", value: "subtotal", sortable: false },
     ],
     detalles: [],
     cabeceraArticulos: [
@@ -387,7 +378,7 @@ export default {
       { text: "Categoría", value: "categoria" },
       { text: "Descripción", value: "descripcion", sortable: false },
       { text: "Stock", value: "stock", sortable: false },
-      { text: "Precio Venta", value: "precio_venta", sortable: false }
+      { text: "Precio Venta", value: "precio_venta", sortable: false },
     ],
     search: "",
 
@@ -418,11 +409,11 @@ export default {
     adModal: 0,
     adAccion: 0,
     adNombre: "",
-    adId: 0
+    adId: 0,
   }),
 
   computed: {
-    calcularTotal: function() {
+    calcularTotal: function () {
       var resultado = 0.0;
       for (var i = 0; i < this.detalles.length; i++) {
         resultado =
@@ -431,7 +422,7 @@ export default {
             this.detalles[i].descuento);
       }
       return resultado;
-    }
+    },
   },
 
   watch: {
@@ -440,7 +431,7 @@ export default {
     },
     dialogDelete(val) {
       val || this.closeDelete();
-    }
+    },
   },
 
   created() {
@@ -463,15 +454,15 @@ export default {
           num_comprobante: me.num_comprobante,
           impuesto: 18,
           total: 1,
-          detalles: me.detalles
+          detalles: me.detalles,
         })
-        .then(function() {
+        .then(function () {
           me.ocultarNuevo();
           me.listar();
 
           me.clean();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -480,11 +471,11 @@ export default {
 
       axios
         .get("api/Sales/ListarDetalles/" + id)
-        .then(function(response) {
+        .then(function (response) {
           //console.log(response);
           me.detalles = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -505,10 +496,10 @@ export default {
 
       axios
         .get("Sales/Listar")
-        .then(function(response) {
+        .then(function (response) {
           me.ventas = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -529,10 +520,10 @@ export default {
       me.errorArticulo = null;
       axios
         .get("Articles/BuscarCodigoVenta/" + this.codigo)
-        .then(function(response) {
+        .then(function (response) {
           me.agregarDetalle(response.data);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
           me.errorArticulo = "No existe el Artículo";
         });
@@ -547,7 +538,7 @@ export default {
           articulo: data["nombre"],
           cantidad: 1,
           precio: data["precio_venta"],
-          descuento: 0
+          descuento: 0,
         });
       }
     },
@@ -584,13 +575,13 @@ export default {
       var clientesarray = [];
       axios
         .get("People/ListarClientes")
-        .then(function(response) {
+        .then(function (response) {
           clientesarray = response.data;
-          clientesarray.map(function(x) {
+          clientesarray.map(function (x) {
             me.clientes.push({ text: x.nombre, value: x.idpersona });
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -599,11 +590,11 @@ export default {
 
       axios
         .get("Articles/ListarVenta/" + me.texto)
-        .then(function(response) {
+        .then(function (response) {
           //console.log(response);
           me.articulos = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -671,17 +662,17 @@ export default {
 
       axios
         .put("Sales/Anular/" + this.adId)
-        .then(function() {
+        .then(function () {
           me.adModal = 0;
           me.adAccion = 0;
           me.adNombre = "";
           me.adId = "";
           me.listarArticulo();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
-    }
-  }
+    },
+  },
 };
 </script>

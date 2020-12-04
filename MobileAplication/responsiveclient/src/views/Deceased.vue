@@ -13,13 +13,20 @@
             </v-progress-circular>
           </div>
         </v-container>
+        <b-form-input
+          type="search"
+          v-model="selectedCategory"
+          placeholder="Buscar"
+        ></b-form-input>
+        <br />
+        <br />
 
         <v-col
           cols="12"
           sm="4"
           ls="12"
           class="pa-3 d-flex flex-column"
-          v-for="post of mortuary"
+          v-for="post of filterDeathMen"
           :key="post.idpersona"
         >
           <v-card
@@ -94,6 +101,7 @@ export default {
       info: null,
       loading: true,
       errored: false,
+      selectedCategory: "",
     };
   },
   async mounted() {
@@ -121,6 +129,26 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+  },
+  computed: {
+    filterDeathMen: function () {
+      var self = this;
+      var category = self.selectedCategory;
+      if (category === "All") {
+        return self.mortuary;
+      } else {
+        return this.mortuary.filter(function (lenguaje) {
+          return (
+            lenguaje.nombre
+              .toLowerCase()
+              .indexOf(self.selectedCategory.toLowerCase()) >= 0 ||
+            lenguaje.apellido
+              .toLowerCase()
+              .indexOf(self.selectedCategory.toLowerCase()) >= 0
+          );
+        });
+      }
     },
   },
 };
