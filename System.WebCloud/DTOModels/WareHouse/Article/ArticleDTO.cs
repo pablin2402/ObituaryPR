@@ -6,6 +6,9 @@ namespace System.WebCloud.DTOModels.WareHouse.Article
     {
         public int idarticulo { get; set; }
         public int idcategoria { get; set; }
+        public int idempresa { get; set; }
+        public string empresa { get; set; }
+
         public string categoria { get; set; }
         public string codigo { get; set; }
         public string nombre { get; set; }

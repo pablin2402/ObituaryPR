@@ -35,33 +35,35 @@
             max-width="500"
           >
             <div class="d-flex flex-no-wrap justify-space-between">
-              <div>
-                <router-link
-                  :to="{
-                    name: 'deceaseddetails',
-                    params: { id: post },
-                  }"
-                >
-                  <v-card-title class="headline"
-                    >{{ post.nombre }} {{ post.apellido }}</v-card-title
+              <template v-if="post.condicion == true">
+                <div>
+                  <router-link
+                    :to="{
+                      name: 'deceaseddetails',
+                      params: { id: post },
+                    }"
                   >
-                </router-link>
-                <v-card-subtitle>
-                  <strong>
-                    ( {{ post.fecha_nacimiento | moment("YYYY") }} -
-                    {{ post.fecha_muerte | moment("YYYY") }} )</strong
-                  >
-                </v-card-subtitle>
-                <v-card-subtitle>
-                  Este sitio web conmemorativo fue creado en memoria de nuestro
-                  ser querido, {{ post.nombre }}
-                </v-card-subtitle>
+                    <v-card-title dark class="headline"
+                      >{{ post.nombre }} {{ post.apellido }}</v-card-title
+                    >
+                  </router-link>
+                  <v-card-subtitle>
+                    <strong>
+                      ( {{ post.fecha_nacimiento | moment("YYYY") }} -
+                      {{ post.fecha_muerte | moment("YYYY") }} )</strong
+                    >
+                  </v-card-subtitle>
+                  <v-card-subtitle>
+                    Este sitio web conmemorativo fue creado en memoria de
+                    nuestro ser querido, {{ post.nombre }}
+                  </v-card-subtitle>
 
-                <v-card-subtitle
-                  >Creado por:
-                  <strong> {{ post.usuario }}</strong></v-card-subtitle
-                >
-              </div>
+                  <v-card-subtitle
+                    >Creado por:
+                    <strong> {{ post.usuario }}</strong></v-card-subtitle
+                  >
+                </div>
+              </template>
 
               <v-avatar class="ma-3" size="125" tile round>
                 <v-img :src="post.imagen1" round></v-img>

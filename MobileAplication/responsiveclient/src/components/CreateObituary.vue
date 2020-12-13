@@ -116,7 +116,7 @@
                         ></v-text-field>
                       </template>
                       <v-date-picker
-                        v-model="fecha_nacimiento"
+                        v-model="fecha_muerte"
                         @input="menu1 = false"
                       ></v-date-picker>
                     </v-menu>

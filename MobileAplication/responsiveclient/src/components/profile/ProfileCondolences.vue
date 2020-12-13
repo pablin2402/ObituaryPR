@@ -3,26 +3,25 @@
     <v-flex>
       <v-data-table
         :headers="headers"
-        :items="categories"
+        :items="condolences"
         :search="search"
         class="elevation-1"
       >
         <template v-slot:top>
           <v-toolbar text>
-            <v-toolbar-title>Categorias</v-toolbar-title>
+            <v-toolbar-title>Mis publicaciones</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-text-field
               class="text-xs-center"
               v-model="search"
-              append-icon="search"
               label="Búsqueda"
               single-line
               hide-details
             ></v-text-field>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="800px">
-              <template v-slot:activator="{ on, attrs }">
+              <!--template v-slot:activator="{ on, attrs }">
                 <v-btn
                   color="primary"
                   dark
@@ -32,7 +31,7 @@
                 >
                   Nueva Categoria
                 </v-btn>
-              </template>
+              </template-->
               <v-card>
                 <v-card-title>
                   <span class="headline">{{ formTitle }}</span>
@@ -40,49 +39,29 @@
 
                 <v-card-text>
                   <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="nombre"
-                          label="Nombre"
-                          name="input-10-1"
-                          :rules="[rules.required, rules.min]"
-                          hint="Por lo menos 8 carácteres"
-                          class="input-group--focused"
-                          counter="50"
-                          maxlength="50"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="descripcion"
-                          label="Descripcion"
-                          :rules="[rules.required, rules.min]"
-                          hint="Por lo menos 8 carácteres"
-                          class="input-group--focused"
-                          counter="256"
-                          maxlength="256"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="imagen"
-                          label="Imagen"
-                          :rules="[rules.required, rules.min]"
-                          hint="Por lo menos 8 carácteres"
-                          class="input-group--focused"
-                          counter="256"
-                          maxlength="256"
-                        >
-                          <template v-slot:label>
-                            Pon el <strong>logo</strong> aqui
-                            <v-icon style="vertical-align: middle">
-                              mdi-file-find
-                            </v-icon>
-                          </template>
-                        </v-text-field>
-                      </v-col>
-                    </v-row>
+                    <v-col class="d-flex" cols="12" sm="12">
+                      <v-text-field
+                        v-model="titulo"
+                        filled
+                        shaped
+                        :rules="[rules.required]"
+                        color="deep-purple"
+                        label="Titulo:"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col class="d-flex" cols="12" sm="12">
+                      <v-textarea
+                        label=""
+                        auto-grow
+                        outlined
+                        rows="3"
+                        row-height="25"
+                        shaped
+                        placeholder="Deja tu tributo aqui"
+                        v-model="mensaje"
+                        :rules="[rules.required]"
+                      ></v-textarea>
+                    </v-col>
                   </v-container>
                 </v-card-text>
 
@@ -154,20 +133,27 @@
         <template v-slot:item="props">
           <tr>
             <td class="justify-center layout px-0">
-              <v-icon small class="mr-2" @click="editItem(props.item)"
-                >edit</v-icon
-              >
+              <!--v-btn
+                color="primary"
+                small
+                class="mr-2"
+                @click="editItem(props.item)"
+                >EDITAR
+              </!--v-btn-->
               <template v-if="props.item.condicion">
-                <v-icon small @click="activate(2, props.item)">block</v-icon>
+                <v-btn color="warning" small @click="activate(2, props.item)"
+                  >Deshabilitar</v-btn
+                >
               </template>
               <template v-else>
-                <v-icon small @click="activate(1, props.item)">check</v-icon>
+                <v-btn color="primary" small @click="activate(1, props.item)"
+                  >Habilitar</v-btn
+                >
               </template>
             </td>
-            <td>{{ props.item.nombre }}</td>
-            <td>{{ props.item.descripcion }}</td>
-            <td>{{ props.item.imagen }}</td>
-            <td>{{ props.item.link }}</td>
+            <td>{{ props.item.fallecido }}</td>
+            <td>{{ props.item.titulo }}</td>
+            <td>{{ props.item.mensaje }}</td>
 
             <td>
               <div v-if="props.item.condicion">
@@ -191,7 +177,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Categories",
+  name: "ProfileCondolences",
   data: () => ({
     categories: [],
     search: "",
@@ -203,24 +189,28 @@ export default {
     dialogDelete: false,
     headers: [
       { text: "Opciones", value: "opciones", sortable: false },
-      { text: "Nombre", value: "nombre" },
-      { text: "Descripcion", value: "descripcion", sortable: false },
-      { text: "Imagen", value: "imagen", sortable: false },
-      { text: "Link", value: "link", sortable: false },
-
+      { text: "Fallecido", value: "fallecido" },
+      { text: "Titulo", value: "titulo", sortable: false },
+      { text: "Mensaje", value: "mensaje", sortable: false },
       { text: "Estado", value: "condicion", sortable: false },
     ],
-    desserts: [],
     editedIndex: -1,
     id: 0,
-    nombre: "",
-    descripcion: "",
-    imagen: "",
+    idmuerto: 0,
+    fallecido: "",
+    titulo: "",
+    mensaje: "",
+    fecha: "",
 
     adModal: 0,
     adAccion: 0,
     AdNombre: "",
     adId: 0,
+
+    //condolences
+    condolences: [],
+    filler: "",
+    people: [],
   }),
 
   computed: {
@@ -239,25 +229,46 @@ export default {
   },
 
   created() {
-    this.listCategories();
+    // this.listCategories();
+    this.getEmail();
   },
-
+  mounted() {
+    this.buscarPersona();
+  },
   methods: {
-    listCategories() {
-      let me = this;
-      axios
-        .get("Categories/List")
-        .then(function (response) {
-          console.log(response);
-          me.categories = response.data;
+    getEmail() {
+      let datos = localStorage.getItem("correo");
+      if (datos == null) {
+        this.filler = "";
+      } else {
+        this.filler = datos;
+      }
+    },
+    async buscarPersona() {
+      await axios
+        .get("People/BuscarPersona/" + this.filler)
+        .then((response) => {
+          this.id = response.data[0].idusuario;
+          this.people = response.data;
+          this.seekCondolences();
+          this.seekCompanies();
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
         });
     },
-
+    seekCondolences() {
+      axios
+        .get("Condolences/GetbyUser/" + parseInt(this.id))
+        .then((response) => {
+          this.condolences = response.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     editItem(item) {
-      this.id = item.idcategoria;
+      this.id = item.idcondolencia;
       this.nombre = item.nombre;
       this.descripcion = item.descripcion;
       this.imagen = item.imagen;
@@ -266,8 +277,8 @@ export default {
     },
     activate(accion, item) {
       this.adModal = 1;
-      this.AdNombre = item.nombre;
-      this.adId = item.idcategoria;
+      this.AdNombre = item.titulo;
+      this.adId = item.idcondolencia;
       if (accion == 1) {
         this.adAccion = 1;
       } else if (accion == 2) {
@@ -275,6 +286,36 @@ export default {
       } else {
         this.adModal = 0;
       }
+    },
+    activar() {
+      let me = this;
+      axios
+        .put("Condolences/Activate/" + this.adId, {})
+        .then(function () {
+          me.adModal = 0;
+          me.adAccion = 0;
+          me.AdNombre = "";
+          me.adId = 0;
+          me.seekCondolences();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    desactivate() {
+      let me = this;
+      axios
+        .put("Condolences/Deactivate/" + this.adId, {})
+        .then(function () {
+          me.adModal = 0;
+          me.adAccion = 0;
+          me.AdNombre = "";
+          me.adId = 0;
+          me.seekCondolences();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     activateclose() {
       this.adModal = 0;
@@ -307,42 +348,13 @@ export default {
       this.imagen = "";
       this.editedIndex = -1;
     },
-    activar() {
-      let me = this;
-      axios
-        .put("Categories/Activate/" + this.adId, {})
-        .then(function () {
-          me.adModal = 0;
-          me.adAccion = 0;
-          me.AdNombre = "";
-          me.adId = 0;
-          me.listCategories();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    desactivate() {
-      let me = this;
-      axios
-        .put("Categories/Deactivate/" + this.adId, {})
-        .then(function () {
-          me.adModal = 0;
-          me.adAccion = 0;
-          me.AdNombre = "";
-          me.adId = 0;
-          me.listCategories();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
+
     save() {
       if (this.editedIndex > -1) {
         let me = this;
         axios
           .put("Categories/Put", {
-            idcategoria: me.id,
+            idcondolencia: me.id,
             nombre: me.nombre,
             descripcion: me.descripcion,
             imagen: me.imagen,

@@ -63,6 +63,7 @@ namespace System.WebCloud.Controllers
             {
 
                 idusuario = articulo.idusuario,
+                idcondolencia = articulo.idcondolencia,
                 fallecido = articulo.fallecido.nombre,
                 titulo = articulo.titulo,
                 mensaje = articulo.mensaje,
@@ -83,7 +84,7 @@ namespace System.WebCloud.Controllers
        
             return all.Select(articulo => new GetByIdDTO
             {
-               
+                idcondolencia = articulo.idcondolencia,
                 usuario = articulo.usuario.nombre,
                 fallecido = articulo.fallecido.nombre,
                 titulo = articulo.titulo,
@@ -123,5 +124,56 @@ namespace System.WebCloud.Controllers
             return Ok();
         }
 
+
+        // PUT: api/Condolences/Deactivate/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Deactivate([FromRoute] int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+            var categoria = await _context.Condolences.FirstOrDefaultAsync(c => c.idcondolencia == id);
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+            categoria.condicion = false;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Guardar Excepción
+                return BadRequest();
+            }
+            return Ok();
+        }
+        // PUT: api/Condolences/Activate/1
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Activate([FromRoute] int id)
+        {
+
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+            var categoria = await _context.Condolences.FirstOrDefaultAsync(c => c.idcondolencia == id);
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+            categoria.condicion = true;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
     }
 }

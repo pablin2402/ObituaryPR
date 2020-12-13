@@ -3,7 +3,7 @@
     <v-flex>
       <v-row justify="center">
         <v-col cols="12" sm="12" ls="12">
-          <h2>Crea tu producto</h2>
+          <h2>Publica tu producto</h2>
           <br />
           <v-snackbar v-model="snackbar">
             {{ text }}
@@ -56,6 +56,18 @@
                       v-model="idcategoria"
                       :items="categorias"
                       label="Categoría"
+                      class="input-group--focused"
+                    ></v-select>
+                    <h7>
+                      <strong
+                        >Debes crear tu negocio, antes de publicar un
+                        producto</strong
+                      >
+                    </h7>
+                    <v-select
+                      v-model="idempresa"
+                      :items="companies"
+                      label="Negocio al que pertenece el producto"
                       class="input-group--focused"
                     ></v-select>
                     <v-text-field
@@ -133,6 +145,7 @@ export default {
       editedIndex: -1,
       id: 0,
       idcategoria: 0,
+      idempresa: 0,
       nombre: "",
       codigo: "",
       stock: 0,
@@ -146,7 +159,9 @@ export default {
       e1: 1,
       snackbar: false,
       snackbar1: false,
-
+      filler: "",
+      ids: 0,
+      companies: [],
       text: "Registrado con éxito",
       text1: "Error al crear el producto",
       valid: true,
@@ -161,19 +176,65 @@ export default {
       categorias: [],
     };
   },
+
+  mounted() {
+    this.buscarPersona();
+  },
+
   created() {
+    this.getEmail();
+    this.selectMyCompany();
+
     this.select();
   },
+
   methods: {
-    select() {
+    getEmail() {
+      let datos = localStorage.getItem("correo");
+      if (datos == null) {
+        this.filler = "";
+      } else {
+        this.filler = datos;
+      }
+    },
+    async buscarPersona() {
+      await axios
+        .get("People/BuscarPersona/" + this.filler)
+        .then((response) => {
+          this.ids = response.data[0].idusuario;
+          console.log(this.ids);
+          this.people = response.data;
+          this.selectMyCompany();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async select() {
       let me = this;
       var categoriasArray = [];
-      axios
+      await axios
         .get("Categories/Select")
         .then(function (response) {
           categoriasArray = response.data;
           categoriasArray.map(function (x) {
             me.categorias.push({ text: x.nombre, value: x.idcategoria });
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    async selectMyCompany() {
+      let me = this;
+      var companiesArray = [];
+      await axios
+        .get("Companies/GetbyUser/" + parseInt(this.ids))
+        .then(function (response) {
+          companiesArray = response.data;
+          companiesArray.map(function (x) {
+            console.log(x.empresa);
+            me.companies.push({ text: x.nombre, value: x.idempresa });
           });
           console.log("cool");
         })
@@ -186,6 +247,7 @@ export default {
       axios
         .post("Articles/PostArticle", {
           idcategoria: parseInt(me.idcategoria),
+          idempresa: parseInt(me.idempresa),
           codigo: me.codigo,
           nombre: me.nombre,
           stock: parseInt(me.stock),

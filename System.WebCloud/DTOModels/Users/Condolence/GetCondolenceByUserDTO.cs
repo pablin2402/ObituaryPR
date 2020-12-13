@@ -8,6 +8,7 @@ namespace System.WebCloud.DTOModels.Users.Condolence
     public class GetCondolenceByUserDTO
     {
         public int idusuario { get; set; }
+        public int idcondolencia { get; set; }
         public string fallecido { get; set; }
 
         public string titulo { get; set; }

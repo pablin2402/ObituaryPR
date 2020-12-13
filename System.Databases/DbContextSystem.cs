@@ -25,7 +25,7 @@ namespace System.Database
         public DbSet<Mortuary> Mortuaries { get; set; }
         public DbSet<DeathPeople> DeathPeoples { get; set; }
         public DbSet<Condolence> Condolences { get; set; }
-
+        public DbSet<Company> Companies { get; set; }
 
         public DbContextSystem(DbContextOptions<DbContextSystem> options) : base(options) 
         { 
@@ -45,7 +45,7 @@ namespace System.Database
             modelBuilder.ApplyConfiguration(new MapMortuary());
             modelBuilder.ApplyConfiguration(new MapFallecido());
             modelBuilder.ApplyConfiguration(new MapCondolence());
-
+            modelBuilder.ApplyConfiguration(new MapCompany());
 
 
 

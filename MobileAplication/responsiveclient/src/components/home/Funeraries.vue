@@ -53,36 +53,33 @@
               <div class="grey--text ml-4">4.5 (413)</div>
             </v-row>
 
-            <div class="my-4 subtitle-1">{{ post.direccion }}</div>
-
-            <div>
-              LLamanos en cualquier momento
-              <br />
-              {{ post.telefono }}
+            <div class="my-4 subtitle-1">
+              <strong>Nuestra dirección: </strong>
             </div>
+
+            <div class="my-4 subtitle-1">{{ post.direccion }}</div>
           </v-card-text>
 
           <v-divider class="mx-4"></v-divider>
 
-          <v-card-title>Horario de atención </v-card-title>
+          <v-card-title>LLamanos en cualquier momento </v-card-title>
 
           <v-card-text>
             <v-chip-group
               active-class="deep-purple accent-4 white--text"
               column
             >
-              <v-chip>5:30PM</v-chip>
-
-              <v-chip>7:30PM</v-chip>
-
-              <v-chip>8:00PM</v-chip>
-
-              <v-chip>9:00PM</v-chip>
+              <v-chip> {{ post.telefono }}</v-chip>
             </v-chip-group>
           </v-card-text>
 
           <v-card-actions>
-            <v-btn rounded color="green">View</v-btn>
+            <v-btn
+              rounded
+              color="green"
+              :to="{ name: 'details', params: { id: post } }"
+              >VER DETALLES</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-col>

@@ -2,10 +2,8 @@
   <v-layout align-center justify-center>
     <v-flex xs12 sm8 md6 lg5 xl4>
       <v-card>
-        <v-toolbar dark color="blue darken-3">
-          <v-toolbar-title>
-            Acceso al Sistema
-          </v-toolbar-title>
+        <v-toolbar dark color="teal darken-1 ">
+          <v-toolbar-title> Acceso al Sistema </v-toolbar-title>
         </v-toolbar>
         <v-card-text>
           <v-text-field
@@ -28,7 +26,9 @@
         </v-card-text>
         <v-card-actions class="px-3 pb-3">
           <v-flex text-xs-right>
-            <v-btn @click="ingresar" color="primary">Ingresar</v-btn>
+            <v-btn @click="ingresar" dark color="teal darken-1 "
+              >Ingresar</v-btn
+            >
           </v-flex>
         </v-card-actions>
       </v-card>
@@ -43,7 +43,7 @@ export default {
     return {
       email: "",
       password: "",
-      error: null
+      error: null,
     };
   },
   methods: {
@@ -51,14 +51,14 @@ export default {
       this.error = null;
       axios
         .post("People/Login", { email: this.email, password: this.password })
-        .then(respuesta => {
+        .then((respuesta) => {
           return respuesta.data;
         })
-        .then(data => {
+        .then((data) => {
           this.$store.dispatch("guardarToken", data.token);
           this.$router.push({ name: "home" });
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.response.status == 400) {
             this.error = "No es un email válido";
           } else if (err.response.status == 404) {
@@ -67,7 +67,7 @@ export default {
             this.error = "Ocurrió un error";
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>

@@ -40,30 +40,30 @@
       <br />
       <h3>MIS PUBLICACIONES</h3>
       <br />
-
+      <profilecondolences />
+      <br />
+      <h3>MIS COMPAÑIAS</h3>
+      <br />
       <v-row align="stretch" class="ma-2">
         <v-col
           cols="12"
           sm="4"
           ls="12"
           class="pa-3 d-flex flex-column"
-          v-for="condolence of condolences"
+          v-for="condolence of companies"
           :key="condolence.titulo"
         >
           <v-card class="elevation-5 flex d-flex flex-column" max-width="344">
             <v-card-text>
-              <p class="display-1 text--primary">{{ condolence.titulo }}</p>
-              <p>Nombre del fallecido :</p>
+              <p class="display-1 text--primary">{{ condolence.nombre }}</p>
+              <p>Categoría de la empresa:</p>
               <div class="text--primary">
-                {{ condolence.fallecido }}
+                <strong>{{ condolence.categoria }}</strong>
               </div>
-              <p>Mensaje :</p>
+              <p>Descripción:</p>
+
               <div class="text--primary">
-                {{ condolence.mensaje }}
-              </div>
-              <p>Fecha de publicación :</p>
-              <div class="text--primary">
-                {{ condolence.fecha | moment("calendar") }}
+                <strong> {{ condolence.descripcion }} </strong>
               </div>
             </v-card-text>
           </v-card>
@@ -75,12 +75,20 @@
 <script>
 import axios from "axios";
 export default {
+  components: {
+    profilecondolences: () =>
+      import("@/components/profile/ProfileCondolences.vue"),
+  },
   data() {
     return {
       condolences: [],
+      companies: [],
       people: [],
       filler: "",
       id: 0,
+      titulo: "",
+      mensaje: "",
+      fecha: "",
       info: null,
       loading: true,
       errored: false,
@@ -109,17 +117,28 @@ export default {
         .then((response) => {
           this.id = response.data[0].idusuario;
           this.people = response.data;
-          this.buscarCondolencias();
+          this.seekCondolences();
+          this.seekCompanies();
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    buscarCondolencias() {
+    seekCondolences() {
       axios
         .get("Condolences/GetbyUser/" + parseInt(this.id))
         .then((response) => {
           this.condolences = response.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    seekCompanies() {
+      axios
+        .get("Companies/GetbyUser/" + parseInt(this.id))
+        .then((response) => {
+          this.companies = response.data;
           console.log("gi " + response);
         })
         .catch((err) => {

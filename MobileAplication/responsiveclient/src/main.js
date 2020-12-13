@@ -18,8 +18,9 @@ Vue.use(require('vue-moment'));
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: "AIzaSyDmPQrfklKHKfqwIOuQZ92Q7G0TW0AYZG8",
+    key: "AIzaSyCNmukHTcFfWJcYE0mWKGAWC5PKCq9uC2w",
   },
+  //AIzaSyCNmukHTcFfWJcYE0mWKGAWC5PKCq9uC2w
 });
 new Vue({
   router,

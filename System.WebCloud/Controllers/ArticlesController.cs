@@ -29,12 +29,15 @@ namespace System.WebCloud.Controllers
         public async Task<IEnumerable<ArticleDTO>> List()
         {
 
-            var article = await _context.Articles.Include(a => a.categoria).ToListAsync();
+            var article = await _context.Articles.Include(a => a.categoria)
+                .Include(a => a.empresa).ToListAsync();
 
             return article.Select(a => new ArticleDTO
             {
                 idarticulo = a.idarticulo,
                 idcategoria = a.idcategoria,
+                idempresa = a.idempresa,
+                empresa = a.empresa.nombre,
                 categoria = a.categoria.nombre,
                 codigo = a.codigo,
                 nombre = a.nombre,
@@ -177,6 +180,8 @@ namespace System.WebCloud.Controllers
 
 
         [HttpPut("[action]")]
+        // PUT: api/Articles/PutArticle/:articleid
+
         public async Task<IActionResult> PutArticle([FromBody] UploadDTO model)
         {
             if (!ModelState.IsValid)
@@ -197,6 +202,7 @@ namespace System.WebCloud.Controllers
             }
 
             articulo.idcategoria = model.idcategoria;
+            articulo.idempresa = model.idempresa;
             articulo.codigo = model.codigo;
             articulo.nombre = model.nombre;
             articulo.precio_venta = model.precio_venta;
@@ -230,6 +236,7 @@ namespace System.WebCloud.Controllers
             {
                 idcategoria = model.idcategoria,
                 codigo = model.codigo,
+                idempresa = model.idempresa,
                 nombre = model.nombre,
                 precio_venta = model.precio_venta,
                 stock = model.stock,
@@ -253,6 +260,7 @@ namespace System.WebCloud.Controllers
         }
 
         [HttpPut("[action]/{id}")]
+        //PUT: api/Articles/Desactivas/:articleid
         public async Task<IActionResult> Desactivar([FromRoute] int id)
         {
             if (id <= 0)

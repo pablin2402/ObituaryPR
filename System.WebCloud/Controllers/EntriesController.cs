@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Database;
 using System.Entity.WareHouse;
 using System.WebCloud.DTOModels.WareHouse.Entry;
+using System.WebCloud.DTOModels.Sales;
 
 namespace System.WebCloud.Controllers
 {
@@ -65,6 +66,24 @@ namespace System.WebCloud.Controllers
                 articulo = d.articulo.nombre,
                 cantidad = d.cantidad,
                 precio = d.precio
+            });
+
+        }
+        [HttpGet("[action]")]
+        //api/Entries/VentasMes12
+        public async Task<IEnumerable<ConsultDTO>> VentasMes12()
+        {
+            var consulta = await _context.Entries
+                .GroupBy(v => v.fecha_hora.Month)
+                .Select(x => new { etiqueta = x.Key, valor = x.Sum(v => v.total) })
+                .OrderByDescending(x => x.etiqueta)
+                .Take(12)
+                .ToListAsync();
+
+            return consulta.Select(v => new ConsultDTO
+            {
+                etiqueta = v.etiqueta.ToString(),
+                valor = v.valor
             });
 
         }

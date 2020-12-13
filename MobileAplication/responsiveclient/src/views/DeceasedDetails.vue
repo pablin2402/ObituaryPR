@@ -35,27 +35,31 @@
           ls="12"
           md="4"
           class="pa-3 d-flex flex-column"
-          v-for="caca of files"
-          :key="caca.idcondolencia"
+          v-for="post of files"
+          :key="post.idcondolencia"
         >
-          <v-card class="elevation-5 flex d-flex flex-column" max-width="500">
-            <div class="d-flex flex-no-wrap justify-space-between">
-              <div>
-                <v-card-title class="headline">{{ caca.titulo }}</v-card-title>
-                <v-card-subtitle>
-                  {{ caca.fecha | moment("dddd, MMMM Do YYYY, h:mm:ss a") }}
-                </v-card-subtitle>
-                <v-card-subtitle>
-                  {{ caca.mensaje }}
-                </v-card-subtitle>
+          <template v-if="post.condicion == true">
+            <v-card class="elevation-5 flex d-flex flex-column" max-width="500">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <div>
+                  <v-card-title class="headline">{{
+                    post.titulo
+                  }}</v-card-title>
+                  <v-card-subtitle>
+                    {{ post.fecha | moment("dddd, MMMM Do YYYY, h:mm:ss a") }}
+                  </v-card-subtitle>
+                  <v-card-subtitle>
+                    {{ post.mensaje }}
+                  </v-card-subtitle>
 
-                <v-card-subtitle
-                  >Creado por :
-                  <strong> {{ caca.usuario }}</strong></v-card-subtitle
-                >
+                  <v-card-subtitle
+                    >Creado por :
+                    <strong> {{ post.usuario }}</strong></v-card-subtitle
+                  >
+                </div>
               </div>
-            </div>
-          </v-card>
+            </v-card>
+          </template>
         </v-col>
       </v-row>
       <v-container id="social" tag="section">

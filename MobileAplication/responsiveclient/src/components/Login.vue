@@ -2,8 +2,8 @@
   <v-layout align-center justify-center>
     <v-flex xs12 sm8 md6 lg5 xl4>
       <v-card v-model="valid">
-        <v-toolbar dark color="light-green darken-2">
-          <v-toolbar-title>Iniciar Sesión </v-toolbar-title>
+        <v-toolbar dark color="teal darken-1 ">
+          <v-toolbar-title color="black">Iniciar Sesión </v-toolbar-title>
         </v-toolbar>
         <v-card-text>
           <v-text-field

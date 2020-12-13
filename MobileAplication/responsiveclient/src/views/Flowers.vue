@@ -44,6 +44,7 @@
                     required
                   ></v-text-field>
                 </v-col>
+
                 <v-col cols="12">
                   <v-data-table
                     :headers="cabeceraDetalles"
@@ -68,6 +69,7 @@
                       <td>
                         {{ props.item.precio }}
                       </td>
+
                       <td>
                         {{ props.item.descuento }}
                       </td>
@@ -177,7 +179,11 @@
                 <div class="my-4 subtitle-1">
                   <strong>{{ post.precio_venta }} Bs.</strong>
                 </div>
-
+                <div>
+                  <strong>{{ post.empresa }}</strong>
+                  <br />
+                  <br />
+                </div>
                 <div>
                   {{ post.descripcion }}
                 </div>
@@ -192,7 +198,8 @@
                   active-class="deep-purple accent-4 white--text"
                   column
                 >
-                  <v-chip>5:30PM</v-chip>
+                  <v-chip>9:00 AM a 18:00 PM</v-chip>
+                  <v-chip>MARTES A DOMINGO</v-chip>
                 </v-chip-group>
               </v-card-text>
 
@@ -229,6 +236,8 @@ export default {
       serie_comprobante: "0100",
       num_comprobante: "0010",
       nombre: "",
+      empresa: "",
+
       impuesto: 0,
       total: 0,
       detalles: [],
@@ -273,6 +282,10 @@ export default {
         return this.flowers.filter(function (lenguaje) {
           return (
             lenguaje.nombre
+              .toLowerCase()
+              .indexOf(self.selectedCategory.toLowerCase()) >= 0 ||
+            lenguaje.empresa
+
               .toLowerCase()
               .indexOf(self.selectedCategory.toLowerCase()) >= 0 ||
             lenguaje.descripcion

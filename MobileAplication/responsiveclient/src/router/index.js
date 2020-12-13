@@ -15,6 +15,8 @@ import CreateObituary from "../components/CreateObituary";
 import DeceasedDetails from "../views/DeceasedDetails.vue";
 import Categories from "../components/home/Categories.vue";
 import Funeraries from "../components/home/Funeraries.vue";
+import ProfileCondolences from "../components/profile/ProfileCondolences.vue";
+
 import CreateMortuary from "../views/CreateMortuary.vue";
 Vue.use(VueRouter);
 
@@ -38,6 +40,16 @@ var router = new VueRouter({
     path: "/categories",  
     name: "categories",
     component: Categories,
+    meta:{
+      administrador:true,
+      almacenero:true,
+      vendedor:true
+    }
+  },
+   {
+    path: "/profilecondolences",  
+    name: "profilecondolences",
+    component: ProfileCondolences,
     meta:{
       administrador:true,
       almacenero:true,

@@ -14,22 +14,29 @@
         <div>
           <b-jumbotron>
             <template #header>{{ name }}</template>
+            <br />
+            <br />
 
             <template #lead>
+              <strong>Ofrecemos los siguientes servicios:</strong>
               {{ description }}
             </template>
 
             <hr class="my-4" />
 
-            <p>
-              {{ latitud }}
-            </p>
+            <h3>
+              {{ servicios }}
+            </h3>
+            <br />
+            <p><strong>Telefono:</strong></p>
+            <h4>{{ telefono }}</h4>
 
-            <b-button variant="primary" href="#">Do Something</b-button>
-            <b-button variant="success" href="#">Do Something Else</b-button>
+            <p><strong>Direccion:</strong></p>
+            <h4>{{ direccion }}</h4>
           </b-jumbotron>
         </div>
       </v-row>
+      <h3>Nuestra ubicación:</h3>
       <Maps :latitude="latitud" :longitude="longitud" :title="name" />
     </v-flex>
   </v-layout>
@@ -60,6 +67,10 @@ export default {
       imagen2: this.$route.params.id.imagen2,
       latitud: this.$route.params.id.posicionx,
       longitud: this.$route.params.id.posiciony,
+      servicios: this.$route.params.id.servicios,
+      telefono: this.$route.params.id.telefono,
+      direccion: this.$route.params.id.direccion,
+
       items: [
         {
           src: this.$route.params.id.imagen2,
