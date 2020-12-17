@@ -25,12 +25,13 @@ namespace System.WebCloud.Controllers
         [HttpGet("[action]")]
         public async Task<IEnumerable<MortuaryDTO>> GetMortuaries()
         {
-            var mortuary = await _context.Mortuaries.Include(a => a.categoria).ToListAsync();
+            var mortuary = await _context.Mortuaries.Include(a => a.categoria).Include(a => a.empresa).ToListAsync();
 
             return mortuary.Select(a => new MortuaryDTO
             {
                 idfuneraria = a.idfuneraria,
                 idcategoria = a.idcategoria,
+               
                 categoria = a.categoria.nombre,
                 codigo = a.codigo,
                 nombre = a.nombre,
@@ -42,7 +43,9 @@ namespace System.WebCloud.Controllers
                 posicionx = a.posicionx,
                 posiciony = a.posiciony,
                 condicion = a.condicion,
-                direccion = a.direccion
+                direccion = a.direccion,
+                idempresa = a.idempresa,
+                empresa = a.empresa.nombre,
             });
         }
         // POST: api/Mortuaries/PostMortuary

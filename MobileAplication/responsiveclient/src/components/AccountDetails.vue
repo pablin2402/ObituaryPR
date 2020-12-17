@@ -38,6 +38,10 @@
         </v-card>
       </v-col>
       <br />
+      <h3>Alertas de posiles fallecidos</h3>
+      <br />
+      <funeraryalert />
+      <br />
       <h3>MIS PUBLICACIONES</h3>
       <br />
       <profilecondolences />
@@ -78,6 +82,7 @@ export default {
   components: {
     profilecondolences: () =>
       import("@/components/profile/ProfileCondolences.vue"),
+    funeraryalert: () => import("@/components/profile/FuneraryAlert.vue"),
   },
   data() {
     return {
@@ -92,6 +97,7 @@ export default {
       info: null,
       loading: true,
       errored: false,
+      empresauid: 0,
     };
   },
   mounted() {

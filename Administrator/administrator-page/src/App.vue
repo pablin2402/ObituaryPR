@@ -60,7 +60,7 @@
                   <v-list-item-action>
                     <v-icon>people</v-icon>
                   </v-list-item-action>
-                  <v-list-item-title>PROVEEDORES</v-list-item-title>
+                  <v-list-item-title>EMPRESAS</v-list-item-title>
                 </v-list-item>
               </v-list-group>
             </template>
@@ -77,12 +77,12 @@
                   </v-list-item-action>
                   <v-list-item-title>INGRESOS</v-list-item-title>
                 </v-list-item>
-                <v-list-item :to="{ name: 'ventas' }">
+                <!--v-list-item :to="{ name: 'ventas' }">
                   <v-list-item-action>
                     <v-icon>shopping_cart</v-icon>
                   </v-list-item-action>
                   <v-list-item-title>VENTAS</v-list-item-title>
-                </v-list-item>
+                </!--v-list-item-->
               </v-list-group>
             </template>
           </v-list-item-group>
@@ -115,7 +115,7 @@
     </v-main>
     <v-footer padless>
       <v-col class="text-center" cols="12">
-        {{ new Date().getFullYear() }} — <strong>Obituary</strong>
+        {{ new Date().getFullYear() }} — <strong>Remembered Forever</strong>
       </v-col>
     </v-footer>
   </v-app>

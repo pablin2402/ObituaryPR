@@ -10,6 +10,8 @@ import Register from "../components/Register.vue";
 import Create from "../views/Create.vue";
 import Details from "../views/Details.vue";
 import CreateItem from "../views/CreateItem.vue";
+import CreateCompany from "../views/CreateCompany.vue";
+
 import Deceased from "../views/Deceased.vue";
 import CreateObituary from "../components/CreateObituary";
 import DeceasedDetails from "../views/DeceasedDetails.vue";
@@ -132,6 +134,16 @@ var router = new VueRouter({
     path: "/createitem",  
     name: "createitem",
     component: CreateItem,
+    meta:{
+      administrador:true,
+      almacenero:true,
+      vendedor:true
+    }
+  },
+   {
+    path: "/createcompany",  
+    name: "createcompany",
+    component: CreateCompany,
     meta:{
       administrador:true,
       almacenero:true,

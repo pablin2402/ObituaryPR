@@ -10,7 +10,7 @@
             v-model="email"
             autofocus
             color="accent"
-            label="Email"
+            label="Correo Electrónico"
             required
           >
           </v-text-field>
@@ -18,7 +18,7 @@
             v-model="password"
             type="password"
             color="accent"
-            label="Password"
+            label="Contraseña"
             required
           >
           </v-text-field>

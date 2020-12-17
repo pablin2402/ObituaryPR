@@ -9,7 +9,7 @@
       >
         <template v-slot:top>
           <v-toolbar text>
-            <v-toolbar-title>Artículos</v-toolbar-title>
+            <v-toolbar-title>Funerarias</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-text-field
@@ -30,7 +30,7 @@
                   v-bind="attrs"
                   v-on="on"
                 >
-                  Nuevo Articulo
+                  Nueva Funeraria
                 </v-btn>
               </template>
               <v-card>
@@ -207,7 +207,7 @@ export default {
       { text: "Posicion Y", value: "posiciony", sortable: false },
       { text: "Imagen", value: "imagen", sortable: false },
       { text: "Imagen 2", value: "imagen2", sortable: false },
-      { text: "Estado", value: "condicion", sortable: false }
+      { text: "Estado", value: "condicion", sortable: false },
     ],
     search: "",
 
@@ -224,13 +224,15 @@ export default {
     adModal: 0,
     adAccion: 0,
     AdNombre: "",
-    adId: 0
+    adId: 0,
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Nuevo Artículo" : "Actualizar Artículo";
-    }
+      return this.editedIndex === -1
+        ? "Nueva Funeraria"
+        : "Actualizar Funeraria";
+    },
   },
 
   watch: {
@@ -239,7 +241,7 @@ export default {
     },
     dialogDelete(val) {
       val || this.closeDelete();
-    }
+    },
   },
 
   created() {
@@ -252,11 +254,11 @@ export default {
       let me = this;
       axios
         .get("Mortuaries/GetMortuaries")
-        .then(function(response) {
+        .then(function (response) {
           console.log(response);
           me.articulos = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -265,13 +267,13 @@ export default {
       var categoriasArray = [];
       axios
         .get("Categories/Select")
-        .then(function(response) {
+        .then(function (response) {
           categoriasArray = response.data;
-          categoriasArray.map(function(x) {
+          categoriasArray.map(function (x) {
             me.categorias.push({ text: x.nombre, value: x.idcategoria });
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -330,14 +332,14 @@ export default {
       let me = this;
       axios
         .put("Articles/Activar/" + this.adId, {})
-        .then(function() {
+        .then(function () {
           me.adModal = 0;
           me.adAccion = 0;
           me.AdNombre = "";
           me.adId = 0;
           me.listCategories();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -345,14 +347,14 @@ export default {
       let me = this;
       axios
         .put("Articles/Desactivar/" + this.adId, {})
-        .then(function() {
+        .then(function () {
           me.adModal = 0;
           me.adAccion = 0;
           me.AdNombre = "";
           me.adId = 0;
           me.listCategories();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -368,15 +370,15 @@ export default {
             stock: me.stock,
             precio_venta: me.precio_venta,
             descripcion: me.descripcion,
-            imagen: me.imagen
+            imagen: me.imagen,
           })
-          .then(function(response) {
+          .then(function (response) {
             console.log(response);
             me.close();
             me.listCategories();
             me.clean();
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log(error);
           });
       } else {
@@ -389,19 +391,19 @@ export default {
             stock: me.stock,
             precio_venta: me.precio_venta,
             descripcion: me.descripcion,
-            imagen: me.imagen
+            imagen: me.imagen,
           })
-          .then(function(response) {
+          .then(function (response) {
             console.log(response);
             me.close();
             me.listCategories();
             me.clean();
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log(error);
           });
       }
-    }
-  }
+    },
+  },
 };
 </script>

@@ -208,7 +208,6 @@ export default {
           categoriasArray.map(function (x) {
             me.categorias.push({ text: x.nombre, value: x.idcategoria });
           });
-          console.log("cool");
         })
         .catch(function (error) {
           console.log(error);

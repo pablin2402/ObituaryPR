@@ -13,8 +13,27 @@
             </v-progress-circular>
           </div>
         </v-container>
+        <br />
+        <br />
+        <br />
+
+        <h3><strong>Encuentre un Obituario</strong></h3>
+        <h6>
+          La herramienta de búsqueda de obituarios en línea de Remembered
+          Forever® le brinda acceso a obituarios de miles de lugares de
+          SudAmérica. Puede buscar por nombre o apellido, estado y fecha de
+          publicación. Una vez que encuentre el obituario que está buscando,
+          puede obtener información importante sobre los próximos servicios ,
+          compartir una foto o nota favorita, y enviar flores o regalos a la
+          familia.
+        </h6>
+        <br />
+        <br />
+        <br />
+
         <b-form-input
           type="search"
+          rounded
           v-model="selectedCategory"
           placeholder="Buscar"
         ></b-form-input>

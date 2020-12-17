@@ -62,25 +62,23 @@
 
           <v-divider class="mx-4"></v-divider>
 
-          <v-card-title>LLamanos en cualquier momento </v-card-title>
-
-          <v-card-text>
-            <v-chip-group
-              active-class="deep-purple accent-4 white--text"
-              column
-            >
-              <v-chip> {{ post.telefono }}</v-chip>
-            </v-chip-group>
-          </v-card-text>
-
-          <v-card-actions>
+          <v-card-title>Llamanos en cualquier momento </v-card-title>
+          <h5 align="center">
+            <v-icon color="blue" large>mdi-cellphone</v-icon>
+            +591 - {{ post.telefono }}
+          </h5>
+          <br />
+          <div class="text-center">
             <v-btn
               rounded
-              color="green"
+              large
+              align="center"
+              color="success"
               :to="{ name: 'details', params: { id: post } }"
               >VER DETALLES</v-btn
             >
-          </v-card-actions>
+          </div>
+          <br />
         </v-card>
       </v-col>
     </v-row>
@@ -105,7 +103,7 @@ export default {
   },
   async mounted() {
     await axios
-      .get("https://localhost:44383/api/Mortuaries/GetMortuaries")
+      .get("Mortuaries/GetMortuaries")
       .then((response) => {
         this.mortuary = response.data;
         this.loading = false;

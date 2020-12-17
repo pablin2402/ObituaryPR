@@ -5,6 +5,9 @@ namespace System.WebCloud.DTOModels.WareHouse.Mortuary
     {
         public int idfuneraria { get; set; }
         public int idcategoria { get; set; }
+        public int idempresa { get; set; }
+        public string empresa { get; set; }
+
         public string categoria { get; set; }
         public string codigo { get; set; }
  

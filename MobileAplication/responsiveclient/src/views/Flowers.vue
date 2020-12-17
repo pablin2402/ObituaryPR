@@ -3,11 +3,13 @@
     <v-flex>
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-          <b-form-input
+          <v-text-field
+            rounded
+            dense
             type="search"
             v-model="selectedCategory"
             placeholder="Buscar"
-          ></b-form-input>
+          ></v-text-field>
           <br />
 
           <v-btn
@@ -204,13 +206,19 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-btn
-                  color="deep-purple lighten-2"
-                  text
-                  @click="agregarDetalle(post)"
-                >
-                  AÑADIR AL CARRITO
-                </v-btn>
+                <v-row align="center">
+                  <v-col cols="12" sm="12">
+                    <div class="text-center">
+                      <v-btn
+                        color="warning"
+                        @click="agregarDetalle(post)"
+                        rounded
+                      >
+                        AÑADIR AL CARRITO <v-icon>mdi-cart</v-icon>
+                      </v-btn>
+                    </div>
+                  </v-col>
+                </v-row>
               </v-card-actions>
             </template>
           </v-card>
@@ -297,13 +305,16 @@ export default {
     },
   },
   mounted() {
-    axios.get("Articles/List").then((response) => {
-      console.log(response);
-
-      this.flowers = response.data;
-    });
+    this.getArticlesList();
   },
   methods: {
+    getArticlesList() {
+      axios.get("Articles/List").then((response) => {
+        console.log(response);
+
+        this.flowers = response.data;
+      });
+    },
     agregarDetalle(caca) {
       this.detalles.push({
         idarticulo: parseInt(caca.idarticulo),

@@ -27,7 +27,6 @@ export default {
     axios
       .get("Mortuaries/GetMortuariesLocation")
       .then((response) => {
-        // this.mortuary = response.data;
         for (var i = 0; i < response.data.length; i++) {
           const marker = {
             lat: response.data[i].posicionx,

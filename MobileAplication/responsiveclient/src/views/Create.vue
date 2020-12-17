@@ -52,14 +52,24 @@ export default {
           "Sientete libre de publicar los productos de tu floreria, o servicios adicionales a una funeraria",
         flex: 6,
       },
+      {
+        title: "Publica tu negocio",
+        src:
+          "https://image.freepik.com/foto-gratis/gente-negocios-dandose-mano_53876-20488.jpg",
+        description:
+          "Publica tu empresa y con ella podras publicar los diferentes productos y servicios que ofreces",
+        flex: 6,
+      },
     ],
   }),
   methods: {
     opendialogItem(item) {
       if (item == "Publica tus productos") {
         this.$router.push({ name: "createitem" });
-      } else {
+      } else if (item == "Crea tu funeraria") {
         this.$router.push({ name: "createmortuary" });
+      } else {
+        this.$router.push({ name: "createcompany" });
       }
     },
   },
