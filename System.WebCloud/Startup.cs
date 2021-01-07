@@ -29,7 +29,12 @@ namespace System.WebCloud
         {
             services.AddControllers();
             services.AddDbContext<DbContextSystem>(options => options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
+            services.AddCors(options => {
+                options.AddPolicy("Todos",
+                    builder => builder.WithOrigins("*").WithHeaders("*").WithMethods("*"));
+            });
             services.AddRazorPages();
+           
 
 
         }
@@ -41,7 +46,7 @@ namespace System.WebCloud
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("Todos");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();

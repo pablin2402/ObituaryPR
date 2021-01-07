@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Entities.WareHouse;
+using System.Entity.WareHouse;
 
 namespace System.Database.Map.WareHouse
 {
